@@ -1,4 +1,4 @@
-# Use anaconda as baseline
+# Use anaconda as baseline 
 FROM continuumio/miniconda3
 
 # Install Jupyter notebook
@@ -13,7 +13,7 @@ RUN opt/conda/bin/jupyter notebook --generate-config
 #############################################################################################################
 
 # Set up Sklearn environment
-RUN /opt/conda/bin/conda create -n sklearn -y scikit-learn
+RUN /opt/conda/bin/conda create -n sklearn -y scikit-learn python=3.9
 RUN /opt/conda/bin/conda install -n sklearn -y -c anaconda ipykernel
 RUN /opt/conda/envs/sklearn/bin/python -m ipykernel install --user --name=sklearn
 RUN /opt/conda/bin/conda install -n sklearn -y -c conda-forge optuna
@@ -23,7 +23,7 @@ RUN /opt/conda/bin/conda install -n sklearn -y pandas
 #############################################################################################################
 
 # Set up GBDT environment
-RUN /opt/conda/bin/conda create -n gbdt -y
+RUN /opt/conda/bin/conda create -n gbdt -y python=3.9
 RUN /opt/conda/bin/conda install -n gbdt -y -c anaconda ipykernel
 RUN /opt/conda/envs/gbdt/bin/python -m ipykernel install --user --name=gbdt
 RUN /opt/conda/envs/gbdt/bin/python -m pip install xgboost==1.5.0
@@ -39,12 +39,13 @@ RUN /opt/conda/envs/gbdt/bin/python -m pip install https://github.com/schufa-inn
 #############################################################################################################
 
 # Set up Pytorch environment
-RUN /opt/conda/bin/conda create -n torch -y pytorch cudatoolkit=11.3 -c pytorch
+RUN /opt/conda/bin/conda create -n torch -y pytorch==1.12.1 python=3.9 -c pytorch 
 RUN /opt/conda/bin/conda install -n torch -y -c anaconda ipykernel
 RUN /opt/conda/bin/conda install -n torch -y -c conda-forge optuna
 RUN /opt/conda/bin/conda install -n torch -y -c conda-forge configargparse
 RUN /opt/conda/bin/conda install -n torch -y scikit-learn
 RUN /opt/conda/bin/conda install -n torch -y pandas
+
 RUN /opt/conda/bin/conda install -n torch -y matplotlib
 RUN /opt/conda/bin/conda install -n torch -y -c pytorch captum
 RUN /opt/conda/bin/conda install -n torch -y shap
@@ -66,7 +67,7 @@ RUN /opt/conda/envs/torch/bin/python -m pip install einops
 #############################################################################################################
 
 # Set up Keras environment
-RUN /opt/conda/bin/conda create -n tensorflow -y tensorflow-gpu=1.15.0 keras
+RUN /opt/conda/bin/conda create -n tensorflow -y tensorflow==2.11.0 python=3.9 keras 
 RUN /opt/conda/bin/conda install -n tensorflow -y -c anaconda ipykernel
 RUN /opt/conda/bin/conda install -n tensorflow -y -c conda-forge optuna
 RUN /opt/conda/bin/conda install -n tensorflow -y -c conda-forge configargparse
@@ -79,15 +80,9 @@ RUN /opt/conda/bin/conda install -n tensorflow -y pandas
 RUN /opt/conda/envs/torch/bin/python -m pip install stg==0.1.2
 
 # For NAM
-RUN /opt/conda/envs/torch/bin/python -m pip install https://github.com/AmrMKayid/nam/archive/main.zip
-RUN /opt/conda/envs/torch/bin/python -m pip install tabulate
+#RUN /opt/conda/envs/torch/bin/python -m pip install https://github.com/AmrMKayid/nam/archive/main.zip
+#RUN /opt/conda/envs/torch/bin/python -m pip install tabulate
 
 # For DANet
 RUN /opt/conda/envs/torch/bin/python -m pip install yacs
-
-#############################################################################################################
-
-# Download code into container
-RUN git clone https://github.com/kathrinse/TabSurvey.git /opt/notebooks
-# Start jupyter notebook
-CMD opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=3123 --no-browser --allow-root
+RUN /opt/conda/envs/torch/bin/python -m pip install tensorboard # added
