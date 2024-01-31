@@ -86,3 +86,9 @@ RUN /opt/conda/envs/torch/bin/python -m pip install stg==0.1.2
 # For DANet
 RUN /opt/conda/envs/torch/bin/python -m pip install yacs
 RUN /opt/conda/envs/torch/bin/python -m pip install tensorboard # added
+
+
+# Download code into container
+RUN git clone https://github.com/liu-bingyan/TabSurvey.git /opt/notebooks
+# Start jupyter notebook
+CMD opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=3123 --no-browser --allow-root
