@@ -1,5 +1,3 @@
 docker run -v ~/output:/opt/notebooks/output -p 3123:3123 --rm -it --gpus all tab-survey
-cd opt/notebooks
-git pull
-
+git -C opt/notebooks pull
 opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=3123 --no-browser --allow-root
