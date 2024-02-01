@@ -90,3 +90,4 @@ RUN /opt/conda/envs/torch/bin/python -m pip install tensorboard # added
 
 # Download code into container
 RUN git clone https://github.com/liu-bingyan/TabSurvey.git /opt/notebooks
+RUN git -C opt/notebooks pull
