@@ -39,8 +39,8 @@ class NAM(BaseModelTorch):
         print(self.config)
 
     def fit(self, X, y, X_val=None, y_val=None):
-        X = np.array(X, dtype=np.float)
-        X_val = np.array(X_val, dtype=np.float)
+        X = np.array(X, dtype=np.float64)
+        X_val = np.array(X_val, dtype=np.float64)
 
         dataset = torch.utils.data.TensorDataset(torch.tensor(X).float(), torch.tensor(y).float())
         trainloader = torch.utils.data.DataLoader(dataset, batch_size=self.args.batch_size, shuffle=True)
@@ -82,7 +82,7 @@ class NAM(BaseModelTorch):
         return metrics_callback.train_loss, metrics_callback.val_loss
 
     def predict_helper(self, X):
-        X = np.array(X, dtype=np.float)
+        X = np.array(X, dtype=np.float64)
         test_dataset = torch.utils.data.TensorDataset(torch.tensor(X).float())
         testloader = torch.utils.data.DataLoader(test_dataset, batch_size=self.args.val_batch_size, shuffle=False)
 
