@@ -1,4 +1,5 @@
 #!/bin/bash
+git pull 
 
 N_TRIALS=2
 EPOCHS=5
@@ -55,7 +56,8 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    time python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
+    %timeit python -train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
+    #time python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
     #python -m cProfile -s tottime train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS  > profile.txt
 
     conda deactivate
