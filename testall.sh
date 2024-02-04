@@ -17,9 +17,9 @@ declare -A MODELS
 MODELS=( #["LinearModel"]=$SKLEARN_ENV
          #["KNN"]=$SKLEARN_ENV
          # ["SVM"]=$SKLEARN_ENV
-         ["DecisionTree"]=$SKLEARN_ENV
+         #["DecisionTree"]=$SKLEARN_ENV
          #["RandomForest"]=$SKLEARN_ENV
-         ["XGBoost"]=$GBDT_ENV
+         #["XGBoost"]=$GBDT_ENV
          #["CatBoost"]=$GBDT_ENV
          #["LightGBM"]=$GBDT_ENV
          ["MLP"]=$TORCH_ENV
@@ -28,18 +28,18 @@ MODELS=( #["LinearModel"]=$SKLEARN_ENV
          #["TabTransformer"]=$TORCH_ENV
          #["ModelTree"]=$GBDT_ENV
          #["NODE"]=$TORCH_ENV
-         ["DeepGBM"]=$TORCH_ENV
+         #["DeepGBM"]=$TORCH_ENV
          #["RLN"]=$KERAS_ENV
          #["DNFNet"]=$KERAS_ENV
          #["STG"]=$TORCH_ENV
          #["NAM"]=$TORCH_ENV
          #["DeepFM"]=$TORCH_ENV
-         ["SAINT"]=$TORCH_ENV
+         #["SAINT"]=$TORCH_ENV
          #["DANet"]=$TORCH_ENV
           )
 
-CONFIGS=( "config/adult.yml"
-          #"config/covertype.yml"
+CONFIGS=( #"config/adult.yml"
+          "config/covertype.yml"
           #"config/california_housing.yml"
           #"config/higgs.yml"
           )
