@@ -1,7 +1,7 @@
 #!/bin/bash
 
 N_TRIALS=2
-EPOCHS=300
+EPOCHS=10
 
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
@@ -55,7 +55,7 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
+    python -m cProfile train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
 
     conda deactivate
 
