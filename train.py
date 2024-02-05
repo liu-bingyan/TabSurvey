@@ -149,16 +149,7 @@ def format_results(args,sc,time):
     results['Train time'] = time[0]
     results['Inference time'] = time[1]
     results.update(sc.get_results())
-    return results
-def record_results(results):  
-    filepath = "logs/results.csv"
-    if filepath not in os.listdir("logs"):
-        with open(filepath, 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=results.keys())
-            writer.writeheader()
-    with open(filepath, 'a', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=results.keys())
-        writer.writerow(results)      
+    return results  
 
 if __name__ == "__main__":    
     parser = get_parser()
