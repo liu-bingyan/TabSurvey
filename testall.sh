@@ -25,7 +25,7 @@ MODELS=( ####["LinearModel"]=$SKLEARN_ENV
          ["MLP"]=$TORCH_ENV
          ####["TabNet"]=$TORCH_ENV
          ####["VIME"]=$TORCH_ENV
-         ["TabTransformer"]=$TORCH_ENV
+         #["TabTransformer"]=$TORCH_ENV
          ####["ModelTree"]=$GBDT_ENV
          ####["NODE"]=$TORCH_ENV
          ####["DeepGBM"]=$TORCH_ENV
