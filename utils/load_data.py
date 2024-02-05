@@ -21,7 +21,7 @@ def load_data(args):
 
     elif args.dataset == "Covertype":  # Multi-class classification dataset
         X, y = sklearn.datasets.fetch_covtype(return_X_y=True)
-        # X, y = X[:10000, :], y[:10000]  # only take 10000 samples from dataset
+       # X, y = X[:10000, : , y[:10000]  # only take 10000 samples from dataset
 
     elif args.dataset == "KddCup99":  # Multi-class classification dataset with categorical data
         X, y = sklearn.datasets.fetch_kddcup99(return_X_y=True)

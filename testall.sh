@@ -2,7 +2,7 @@
 git pull 
 
 N_TRIALS=2
-EPOCHS=5
+EPOCHS=400
 
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
@@ -17,16 +17,16 @@ KERAS_ENV="tensorflow"
 declare -A MODELS
 MODELS=( #["LinearModel"]=$SKLEARN_ENV
          #["KNN"]=$SKLEARN_ENV
-         # ["SVM"]=$SKLEARN_ENV
-         #["DecisionTree"]=$SKLEARN_ENV
+         ["SVM"]=$SKLEARN_ENV
+         ["DecisionTree"]=$SKLEARN_ENV
          #["RandomForest"]=$SKLEARN_ENV
-         #["XGBoost"]=$GBDT_ENV
+         ["XGBoost"]=$GBDT_ENV
          #["CatBoost"]=$GBDT_ENV
          #["LightGBM"]=$GBDT_ENV
-         ["MLP"]=$TORCH_ENV
+         ##["MLP"]=$TORCH_ENV
          #["TabNet"]=$TORCH_ENV
          #["VIME"]=$TORCH_ENV
-         #["TabTransformer"]=$TORCH_ENV
+         ["TabTransformer"]=$TORCH_ENV
          #["ModelTree"]=$GBDT_ENV
          #["NODE"]=$TORCH_ENV
          #["DeepGBM"]=$TORCH_ENV
@@ -34,13 +34,13 @@ MODELS=( #["LinearModel"]=$SKLEARN_ENV
          #["DNFNet"]=$KERAS_ENV
          #["STG"]=$TORCH_ENV
          #["NAM"]=$TORCH_ENV
-         #["DeepFM"]=$TORCH_ENV
-         #["SAINT"]=$TORCH_ENV
+         ["DeepFM"]=$TORCH_ENV
+         ["SAINT"]=$TORCH_ENV
          #["DANet"]=$TORCH_ENV
           )
 
-CONFIGS=( #"config/adult.yml"
-          "config/covertype.yml"
+CONFIGS=( "config/adult.yml"
+          #"config/covertype.yml"
           #"config/california_housing.yml"
           #"config/higgs.yml"
           )
@@ -56,7 +56,7 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    %timeit python -train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
+    python -train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
     #time python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
     #python -m cProfile -s tottime train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS  > profile.txt
 
