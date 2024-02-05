@@ -2,13 +2,15 @@ import logging
 import sys
 
 import optuna
+import os
 
 from models import str2model
 from utils.load_data import load_data
 from utils.scorer import get_scorer
 from utils.timer import Timer
-from utils.io_utils import save_results_to_file, save_hyperparameters_to_file, save_loss_to_file
+from utils.io_utils import save_results_to_file, save_hyperparameters_to_file, save_loss_to_file,save_results_to_csv_file
 from utils.parser import get_parser, get_given_parameters_parser
+import csv
 
 from sklearn.model_selection import KFold, StratifiedKFold  # , train_test_split
 
@@ -134,16 +136,40 @@ def main_once(args):
     print(sc.get_results())
     print(time)
 
+    # Save results in a file
+    result = format_results(args,sc,time)
+    save_results_to_csv_file(args,result)
 
-if __name__ == "__main__":
+def format_results(args,sc,time):
+    results = {}
+    results['Model'] = args.model_name
+    results['Dataset'] = args.dataset
+    results['NSplits'] = args.num_splits
+    results['Epochs'] = args.epochs
+    results['Train time'] = time[0]
+    results['Inference time'] = time[1]
+    results.update(sc.get_results())
+    return results
+def record_results(results):  
+    filepath = "logs/results.csv"
+    if filepath not in os.listdir("logs"):
+        with open(filepath, 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=results.keys())
+            writer.writeheader()
+    with open(filepath, 'a', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=results.keys())
+        writer.writerow(results)      
+
+if __name__ == "__main__":    
     parser = get_parser()
     arguments = parser.parse_args()
     print(arguments)
-
+    
     if arguments.optimize_hyperparameters:
         main(arguments)
     else:
         # Also load the best parameters
         parser = get_given_parameters_parser()
         arguments = parser.parse_args()
+
         main_once(arguments)

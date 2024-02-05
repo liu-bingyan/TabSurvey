@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import os
 import pickle
 import datetime
@@ -117,3 +118,18 @@ def get_predictions_from_file(args):
         content.append(np.load(dir_path + "/" + file))
 
     return content
+
+def save_results_to_csv_file(args,results, append=True):
+    filename = 'logs/'+args.model_name+'_'+args.dataset+'.csv'
+    if append:
+        if os.path.exists(filename):
+            old_res = pd.read_csv(filename)
+            new_res = pd.DataFrame(results,index=[0])
+            res = pd.concat([old_res,new_res])
+            res.to_csv(filename,index=False)
+        else:
+            new_res = pd.DataFrame(results,index=[0])
+            new_res.to_csv(filename,index=False)
+    else:
+        new_res = pd.DataFrame(results,index=[0])
+        new_res.to_csv(filename,index=False)

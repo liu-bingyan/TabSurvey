@@ -1,7 +1,6 @@
-#
-Get things run 
+# verify its results 
 - figure out how to use GPUS while training on Windows
-- figure out
+- run the test on docker see its accuracy and AUC
 
 
 # time issue
