@@ -1,4 +1,4 @@
-$N_TRIALS = 2
+$N_TRIALS = 5
 $EPOCHS = 400
 
 $SKLEARN_ENV = "sklearn"
@@ -32,8 +32,8 @@ $MODELS = @{
 }
 
 $CONFIGS = @(
-    "config/adult.yml"
-    #"config/covertype.yml"
+    #"config/adult.yml"
+    "config/covertype.yml"
     #"config/california_housing.yml"
     #"config/higgs.yml"
 )
