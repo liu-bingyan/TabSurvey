@@ -1,5 +1,4 @@
 #!/bin/bash
-git pull 
 
 N_TRIALS=2
 EPOCHS=400
