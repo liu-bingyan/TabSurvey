@@ -122,18 +122,20 @@ def get_predictions_from_file(args):
 def save_results_to_csv_file(args,results, append=True):
     filename = 'logs/'+args.model_name+'_'+args.dataset+'.csv'
     new_res = pd.DataFrame(results,index=[0])
+    
+    log_folder = "logs"
+    if not os.path.exists(log_folder):
+        os.makedirs(log_folder)
+
     if append:
         if os.path.exists(filename):
             old_res = pd.read_csv(filename)
             res = pd.concat([old_res,new_res])
             res.to_csv(filename,index=False)
         else:
-            os.makedirs('logs')
             new_res.to_csv(filename,index=False)
     else:
         if os.path.exists(filename):
             os.remove(filename)
-        else:
-            os.makedirs('logs')
         new_res.to_csv(filename,index=False)
 
