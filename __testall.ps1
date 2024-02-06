@@ -7,7 +7,7 @@ $TORCH_ENV = "torch"
 $KERAS_ENV = "tensorflow"
 
 $MODELS = @{
-    #"LinearModel" = $SKLEARN_ENV
+    "LinearModel" = $SKLEARN_ENV
     #"KNN" = $SKLEARN_ENV
     #"SVM" = $SKLEARN_ENV
     #"DecisionTree" = $SKLEARN_ENV
@@ -15,7 +15,7 @@ $MODELS = @{
     #"XGBoost" = $GBDT_ENV
     #"CatBoost" = $GBDT_ENV
     #"LightGBM" = $GBDT_ENV
-    "MLP" = $TORCH_ENV
+    #"MLP" = $TORCH_ENV
     #"TabNet" = $TORCH_ENV
     #"VIME" = $TORCH_ENV
     #"TabTransformer" = $TORCH_ENV
@@ -32,8 +32,8 @@ $MODELS = @{
 }
 
 $CONFIGS = @(
-    #"config/adult.yml"
-    "config/covertype.yml"
+    "config/adult.yml"
+    #"config/covertype.yml"
     #"config/california_housing.yml"
     #"config/higgs.yml"
 )
