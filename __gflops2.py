@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.softmax(data,dim=1)
+    labels = torch.max(data,dim=1)
     print(data.shape)
     print(labels.shape)
 
