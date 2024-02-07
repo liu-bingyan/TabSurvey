@@ -45,6 +45,6 @@ if __name__ == "__main__":
     
         print(f"Epoch {epoch+1}/{100}, Loss: {loss.item()}")
     
-    train_timer.stop()
+    train_timer.end()
     print(f'total time spent : {train_timer.get_average_time()}')
     print("Finished Training")
