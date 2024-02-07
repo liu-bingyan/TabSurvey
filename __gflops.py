@@ -6,7 +6,7 @@ from utils import timer
 
 # Define the neural network class
 class MLP(nn.Module):
-    def __init__(self, in_features=50, out_features=7, hidden_dim=68, num_hidden_layers=3):
+    def __init__(self, in_features=90, out_features=7, hidden_dim=68, num_hidden_layers=3):
         super(MLP, self).__init__()
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(in_features, hidden_dim))
