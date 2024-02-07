@@ -5,21 +5,39 @@ from utils import timer
 
 
 # Define the neural network class
-class MLP(nn.Module):
-    def __init__(self, in_features=100, out_features=100, hidden_dim=68, num_hidden_layers=3):
-        super(MLP, self).__init__()
+class FuckMLP(nn.Module):
+
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, task):
+        super().__init__()
+
+        self.task = task
+
         self.layers = nn.ModuleList()
-        self.layers.append(nn.Linear(in_features, hidden_dim))
-        self.layers.append(nn.ReLU())
-        for _ in range(num_hidden_layers - 1):
-            self.layers.append(nn.Linear(hidden_dim, hidden_dim))
-            self.layers.append(nn.ReLU())
-        self.layers.append(nn.Linear(hidden_dim, out_features))
+
+        # Input Layer (= first hidden layer)
+        self.input_layer = nn.Linear(input_dim, hidden_dim)
+
+        # Hidden Layers (number specified by n_layers)
+        self.layers.extend([nn.Linear(hidden_dim, hidden_dim) for _ in range(n_layers - 1)])
+
+        # Output Layer
+        self.output_layer = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, x):
+        x = torch.relu(self.input_layer(x))
+
+        # Use ReLU as activation for all hidden layers
         for layer in self.layers:
-            x = layer(x)
+            x = torch.relu(layer(x))
+
+        # No activation function on the output
+        x = self.output_layer(x)
+
+        if self.task == "classification":
+            x = torch.softmax(x, dim=1)
+
         return x
+
 
 if __name__ == "__main__":
     # Create an instance of the neural network
@@ -28,9 +46,10 @@ if __name__ == "__main__":
     nrows = 1000000
     in_features = 100
     out_features = 100
+    print(f"nepochs: {nepochs}, nrows: {nrows}, in_features: {in_features}, out_features: {out_features}")
 
     # Create an instance of the neural network
-    net = MLP(in_features, out_features, hidden_dim=68, num_hidden_layers=3)
+    net = FuckMLP(in_features, out_features, hidden_dim=68, num_hidden_layers=3)
     train_timer = timer.Timer()
 
 
