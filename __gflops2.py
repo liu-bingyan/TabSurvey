@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.randn(nrows, 1, dtype=torch.float32)
+    labels = torch.softmax(data,dim=1)
 
     # Use GPU for training if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -81,7 +81,8 @@ if __name__ == "__main__":
         loss.backward()
         optimizer.step()
     
-        print(f"Epoch {epoch+1}/{nepochs}, Loss: {loss.item()}")
+        if (epoch + 1) % 50 == 0:
+            print(f"Epoch {epoch+1}/{nepochs}, Loss: {loss.item()}")
     
     train_timer.end()
     print(f'total time spent : {train_timer.get_average_time()}')
