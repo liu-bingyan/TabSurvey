@@ -33,8 +33,8 @@ class FuckMLP(nn.Module):
         # No activation function on the output
         x = self.output_layer(x)
 
-        #if self.task == "classification":
-            #x = torch.softmax(x, dim=1)
+        if self.task == "classification":
+            x = torch.softmax(x, dim=1)
 
         return x
 
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     nepochs = 1000
     nrows = 1000000
     in_features = 100
-    out_features = 100
+    out_features = 1
     print(f"nepochs: {nepochs}, nrows: {nrows}, in_features: {in_features}, out_features: {out_features}")
 
     # Create an instance of the neural network
