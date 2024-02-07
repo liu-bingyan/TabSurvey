@@ -40,7 +40,7 @@ class FuckMLP(nn.Module):
 
 def generate_labels(data):
     y = torch.argmax(data, dim=1)
-    return y
+    return y.flatten()  
 
 if __name__ == "__main__":
     # Create an instance of the neural network
