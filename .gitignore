@@ -14,5 +14,7 @@ data/
 *.zip
 *.csv
 *.info
+*.ps1
 
+REMARK.md
 TODO.md
