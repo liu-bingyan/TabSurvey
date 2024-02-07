@@ -5,7 +5,7 @@ from utils import timer
 
 # Define the neural network class
 class SimpleNet(nn.Module):
-    def __init__(self, in_features = 1000,out_features=100):
+    def __init__(self, in_features = 100,out_features=100):
         super(SimpleNet, self).__init__()
         self.linear = nn.Linear(in_features=in_features, out_features=out_features)
         self.relu = nn.ReLU()
@@ -17,9 +17,9 @@ class SimpleNet(nn.Module):
     
 
 if __name__ == "__main__":
-    nepochs = 100
+    nepochs = 1000
     nrows = 1000000
-    in_features = 1000
+    in_features = 100
     out_features = 100
 
 
