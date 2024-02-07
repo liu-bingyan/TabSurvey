@@ -33,8 +33,8 @@ class FuckMLP(nn.Module):
         # No activation function on the output
         x = self.output_layer(x)
 
-        if self.task == "classification":
-            x = torch.softmax(x, dim=1)
+        #if self.task == "classification":
+            #x = torch.softmax(x, dim=1)
 
         return x
 
