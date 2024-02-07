@@ -4,6 +4,8 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import numpy as np
 import pandas as pd
 
+from utils.artifact import generate_artifact_data
+
 
 def discretize_colum(data_clm, num_values=10):
     """ Discretize a column by quantiles """
@@ -18,6 +20,9 @@ def load_data(args):
 
     if args.dataset == "CaliforniaHousing":  # Regression dataset
         X, y = sklearn.datasets.fetch_california_housing(return_X_y=True)
+
+    elif args.dataset == "Artifact":  # Artifical dataset for testing 
+        X, y = generate_artifact_data(50000)
 
     elif args.dataset == "Covertype":  # Multi-class classification dataset
         X, y = sklearn.datasets.fetch_covtype(return_X_y=True)
