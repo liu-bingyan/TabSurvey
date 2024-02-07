@@ -30,8 +30,8 @@ if __name__ == "__main__":
 
 
     # Define your training data and labels
-    data = torch.randn(nrows, in_features)
-    labels = torch.randn(nrows, 1)
+    data = torch.randn(nrows, in_features,dtype=torch.float32)
+    labels = torch.randn(nrows, 1,dtype=torch.float32)
 
     # Use GPU for training if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
