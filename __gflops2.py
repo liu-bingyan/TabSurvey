@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # Create an instance of the neural network
 
     nepochs = 1000
-    nrows = 1000000
+    nrows = 100000
     in_features = 100
     out_features = 1
     print(f"nepochs: {nepochs}, nrows: {nrows}, in_features: {in_features}, out_features: {out_features}")
