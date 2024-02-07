@@ -35,7 +35,7 @@ class TabNet(BaseModelTorch):
         if self.args.objective == "regression":
             y, y_val = y.reshape(-1, 1), y_val.reshape(-1, 1)
         
-        X = X.astype(np.float64)
+        X = X.astype(np.float32)
 
         self.model.fit(X, y, eval_set=[(X_val, y_val)], eval_name=["eval"], eval_metric=self.metric,
                        max_epochs=self.args.epochs, patience=self.args.early_stopping_rounds,
@@ -45,7 +45,7 @@ class TabNet(BaseModelTorch):
         return history['loss'], history["eval_" + self.metric[0]]
 
     def predict_helper(self, X):
-        X = np.array(X, dtype=np.float64)
+        X = np.array(X, dtype=np.float32)
 
         if self.args.objective == "regression":
             return self.model.predict(X)
@@ -82,6 +82,6 @@ class TabNet(BaseModelTorch):
             Only strategy are supported: default ("") 
             Return attribution in the same shape as X.
         """
-        X = np.array(X, dtype=np.float64)
+        X = np.array(X, dtype=np.float32)
         attributions = self.model.explain(torch.tensor(X, dtype=torch.float32))[0]
         return attributions

@@ -56,8 +56,8 @@ class NODE(BaseModelTorch):
 
     def fit(self, X, y, X_val=None, y_val=None):
         data = node_lib.Dataset(self.args.dataset, random_state=815,
-                                X_train=np.array(X, dtype=np.float64), y_train=np.array(y, dtype=np.float64),
-                                X_valid=np.array(X_val, dtype=np.float64), y_valid=np.array(y_val, dtype=np.float64))
+                                X_train=np.array(X, dtype=np.float32), y_train=np.array(y, dtype=np.float32),
+                                X_valid=np.array(X_val, dtype=np.float32), y_valid=np.array(y_val, dtype=np.float32))
 
         with torch.no_grad():
             # trigger data-aware initialisation
@@ -139,7 +139,7 @@ class NODE(BaseModelTorch):
         return loss_history, val_loss_history
 
     def predict_helper(self, X):
-        X_test = torch.as_tensor(np.array(X, dtype=np.float64), device=self.device, dtype=torch.float32)
+        X_test = torch.as_tensor(np.array(X, dtype=np.float32), device=self.device, dtype=torch.float32)
         self.model.train(False)
         with torch.no_grad():
             prediction = process_in_chunks(self.model, X_test, batch_size=self.args.val_batch_size)
