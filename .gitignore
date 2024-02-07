@@ -8,6 +8,7 @@ catboost_info/
 logs/
 output/
 docker/
+data/
 
 *.db
 *.zip

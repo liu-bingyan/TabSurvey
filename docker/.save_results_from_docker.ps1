@@ -8,3 +8,4 @@ $files = docker exec ${containerId} ls /opt/notebooks/logs
 foreach ($file in $files) {
     docker cp ${containerId}:/opt/notebooks/logs/$file $localPath
 }
+
