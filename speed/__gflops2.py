@@ -38,6 +38,9 @@ class FuckMLP(nn.Module):
 
         return x
 
+def generate_labels(data):
+    y = torch.argmax(data, dim=1)
+    return y
 
 if __name__ == "__main__":
     # Create an instance of the neural network
@@ -55,7 +58,7 @@ if __name__ == "__main__":
 
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.randn(nrows, out_features,dtype=torch.float32)
+    labels = generate_labels(data)
 
     # Use GPU for training if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
