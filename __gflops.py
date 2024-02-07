@@ -3,29 +3,34 @@ import torch.nn as nn
 import torch.optim as optim
 from utils import timer
 
+
 # Define the neural network class
-class SimpleNet(nn.Module):
-    def __init__(self, in_features = 100,out_features=100):
-        super(SimpleNet, self).__init__()
-        self.linear = nn.Linear(in_features=in_features, out_features=out_features)
-        self.relu = nn.ReLU()
+class MLP(nn.Module):
+    def __init__(self, in_features=50, out_features=7, hidden_dim=68, num_hidden_layers=3):
+        super(MLP, self).__init__()
+        self.layers = nn.ModuleList()
+        self.layers.append(nn.Linear(in_features, hidden_dim))
+        self.layers.append(nn.ReLU())
+        for _ in range(num_hidden_layers - 1):
+            self.layers.append(nn.Linear(hidden_dim, hidden_dim))
+            self.layers.append(nn.ReLU())
+        self.layers.append(nn.Linear(hidden_dim, out_features))
 
     def forward(self, x):
-        x = self.linear(x)
-        x = self.relu(x)
+        for layer in self.layers:
+            x = layer(x)
         return x
-    
 
 if __name__ == "__main__":
+    # Create an instance of the neural network
+
     nepochs = 1000
     nrows = 1000000
     in_features = 100
     out_features = 100
 
-
-
     # Create an instance of the neural network
-    net = SimpleNet(in_features,out_features)
+    net = MLP(in_features, out_features, hidden_dim=68, num_hidden_layers=3)
     train_timer = timer.Timer()
 
 
@@ -54,7 +59,7 @@ if __name__ == "__main__":
         loss.backward()
         optimizer.step()
     
-        print(f"Epoch {epoch+1}/{100}, Loss: {loss.item()}")
+        print(f"Epoch {epoch+1}/{nepochs}, Loss: {loss.item()}")
     
     train_timer.end()
     print(f'total time spent : {train_timer.get_average_time()}')
