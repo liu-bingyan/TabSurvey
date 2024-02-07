@@ -20,14 +20,25 @@ if __name__ == "__main__":
     nepochs = 100
     nrows = 1000
     in_features = 100
-    
+
+
+
+
     # Create an instance of the neural network
     net = SimpleNet()
     train_timer = timer.Timer()
-    # Define your training data and labels
 
+
+    # Define your training data and labels
     data = torch.randn(nrows, in_features)
     labels = torch.randn(nrows, 1)
+
+    # Use GPU for training if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    net.to(device)
+    data = data.to(device)
+    labels = labels.to(device)
+    print(device)
 
     # Define the loss function and optimizer
     criterion = nn.MSELoss()
