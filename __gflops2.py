@@ -49,7 +49,7 @@ if __name__ == "__main__":
     print(f"nepochs: {nepochs}, nrows: {nrows}, in_features: {in_features}, out_features: {out_features}")
 
     # Create an instance of the neural network
-    net = FuckMLP(in_features, out_features, hidden_dim=68, num_hidden_layers=3)
+    net = FuckMLP(n_layers=3, input_dim=in_features, hidden_dim=68, output_dim=out_features,task='classification')
     train_timer = timer.Timer()
 
 
