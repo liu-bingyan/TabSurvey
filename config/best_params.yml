@@ -38,6 +38,13 @@ parameters: {
             n_layers: 4,
             learning_rate: 8.4e-4
         },
+        MLPNUM: {
+            hidden_dim: 47,
+            n_layers: 4,
+            learning_rate: 8.4e-4,
+            bins: 5
+        },
+
         TabNet: {
             n_d: 14,
             n_steps: 3,
@@ -54,6 +61,13 @@ parameters: {
             alpha: 9.83,
             beta: 0.313
         },
+        VIMENUM: {
+            p_m: 0.113,
+            K: 15,
+            alpha: 9.83,
+            beta: 0.313,
+            bins: 5
+        },
         TabTransformer: {
             dim: 128,
             depth: 1,
@@ -61,6 +75,15 @@ parameters: {
             weight_decay: -5,
             learning_rate: -5,
             dropout: 0.4
+        },
+        TabTransformerNUM: {
+            dim: 128,
+            depth: 1,
+            heads: 4,
+            weight_decay: -5,
+            learning_rate: -5,
+            dropout: 0.4,
+            bins: 5
         },
         NODE: {
             num_layers: 4,
@@ -89,6 +112,12 @@ parameters: {
             lam: 6.2e-3,
             hidden_dims: [500, 50, 10]
         },
+        STGNUM: {
+            learning_rate: 4.64e-3,
+            lam: 6.2e-3,
+            bins: 5,
+            hidden_dims: [500, 50, 10]
+        },
         NAM: {
             lr: 1.2e-3,
             output_regularization: 2.95e-3,
@@ -98,16 +127,34 @@ parameters: {
         DeepFM: {
             dnn_dropout: 0.4
         },
+        DeepFMNUM: {
+            dnn_dropout: 0.4,
+            bins: 5
+        },
         SAINT: {
             dim: 32,
             depth: 1,
             heads: 2,
             dropout: 0.6
         },
+        SAINTNUM: {
+            dim: 32,
+            depth: 1,
+            heads: 2,
+            bins: 5,
+            dropout: 0.6
+        },
         DANet: {
             layer: 8,
             base_outdim: 96,
             k: 4,
+            drop_rate: 0
+        },
+        DANetNUM: {
+            layer: 8,
+            base_outdim: 96,
+            k: 4,
+            bins: 5,
             drop_rate: 0
         },
     },
@@ -149,6 +196,12 @@ parameters: {
             n_layers: 3,
             learning_rate: 9.0e-4
         },
+        MLPNUM: {
+            hidden_dim: 68,
+            n_layers: 3,
+            learning_rate: 9.0e-4,
+            bins: 5
+        },
         TabNet: {
             n_d: 43,
             n_steps: 4,
@@ -165,6 +218,13 @@ parameters: {
             alpha: 9.26,
             beta: 0.104
         },
+        VIMENUM: {
+            p_m: 0.825,
+            K: 5,
+            alpha: 9.26,
+            beta: 0.104,
+            bins: 5
+        },
         TabTransformer: {
             dim: 256,
             depth: 6,
@@ -172,6 +232,15 @@ parameters: {
             weight_decay: -2,
             learning_rate: -3,
             dropout: 0.3
+        },
+        TabTransformerNUM: {
+            dim: 256,
+            depth: 6,
+            heads: 4,
+            weight_decay: -2,
+            learning_rate: -3,
+            dropout: 0.3,
+            bins: 5
         },
         NODE: {
             num_layers: 2,
@@ -200,6 +269,12 @@ parameters: {
             lam: 1.87e-3,
             hidden_dims: [ 500, 400, 20 ]
         },
+        STGNUM: {
+            learning_rate: 1.48e-3,
+            lam: 1.87e-3,
+            bins: 5,
+            hidden_dims: [ 500, 400, 20 ]
+        },
         NAM: {
             lr: 1.14e-3,
             output_regularization: 9.1e-3,
@@ -207,7 +282,11 @@ parameters: {
             feature_dropout: 0.154,
         },
         DeepFM: {
-            dnn_dropout: 0.484
+            dnn_dropout: 0.484,
+        },
+        DeepFMNUM: {
+            dnn_dropout: 0.484,
+            bins: 5
         },
         SAINT: {
             dim: 256,
@@ -215,10 +294,24 @@ parameters: {
             heads: 2,
             dropout: 0.6
         },
+        SAINTNUM: {
+            dim: 256,
+            depth: 1,
+            heads: 2,
+            bins: 5,
+            dropout: 0.6
+        },
         DANet: {
             layer: 10,
             base_outdim: 96,
             k: 3,
+            drop_rate: 0
+        },
+        DANetNUM: {
+            layer: 10,
+            base_outdim: 96,
+            k: 3,
+            bins: 5,
             drop_rate: 0
         },
     },
@@ -260,6 +353,12 @@ parameters: {
             n_layers: 3,
             learning_rate: 7.0e-4
         },
+        MLPNUM: {
+            hidden_dim: 99,
+            n_layers: 3,
+            learning_rate: 7.0e-4,
+            bins: 5
+        },
         TabNet: {
             n_d: 64,
             n_steps: 5,
@@ -276,6 +375,13 @@ parameters: {
             alpha: 2.75,
             beta: 3.24
         },
+        VIMENUM: {
+            p_m: 0.112,
+            K: 20,
+            alpha: 2.75,
+            beta: 3.24,
+            bins: 5
+        },
         TabTransformer: {
             dim: 64,
             depth: 12,
@@ -283,6 +389,15 @@ parameters: {
             weight_decay: -1,
             learning_rate: -5,
             dropout: 0.4
+        },
+        TabTransformerNUM: {
+            dim: 64,
+            depth: 12,
+            heads: 8,
+            weight_decay: -1,
+            learning_rate: -5,
+            dropout: 0.4,
+            bins: 5
         },
         NODE: {
             num_layers: 2,
@@ -311,6 +426,12 @@ parameters: {
             lam: 7.07e-3,
             hidden_dims: [ 500, 400, 20 ]
         },
+        STGNUM: {
+            learning_rate: 2.23e-4,
+            lam: 7.07e-3,
+            bins: 5,
+            hidden_dims: [ 500, 400, 20 ]
+        },
         NAM: {
             lr: 1.14e-3,
             output_regularization: 9.1e-3,
@@ -320,11 +441,179 @@ parameters: {
         DeepFM: {
             dnn_dropout: 0.484
         },
+        DeepFMNUM: {
+            dnn_dropout: 0.484,
+            bins: 5
+        },
         SAINT: {
             dim: 128,
             depth: 1,
             heads: 2,
             dropout: 0
+        },
+        SAINTNUM: {
+            dim: 128,
+            depth: 1,
+            heads: 2,
+            bins: 5,
+            dropout: 0
         }
+    },
+    Artifact: {  #Not trained, copy from california housing
+        LinearModel: { },
+        KNN: {
+            n_neighbors: 11
+        },
+        DecisionTree: {
+            max_depth: 10
+        },
+        RandomForest: {
+            max_depth: 12,
+            n_estimators: 7
+        },
+        XGBoost: {
+            max_depth: 7,
+            lambda: 5.47e-4,
+            alpha: 0.4515,
+            eta: 0.0845
+        },
+        CatBoost: {
+            learning_rate: 0.129,
+            max_depth: 12,
+            l2_leaf_reg: 17.7
+        },
+        LightGBM: {
+            num_leaves: 34,
+            lambda_l2: 1.3e-3,
+            lambda_l1: 2.6e-5,
+            learning_rate: 7.1e-2
+        },
+        ModelTree: {
+            criterion: gradient-renorm-z,
+            max_depth: 3
+        },
+        MLP: {
+            hidden_dim: 68,
+            n_layers: 3,
+            learning_rate: 9.0e-4
+        },
+        MLPNUM: {
+            hidden_dim: 68,
+            n_layers: 3,
+            learning_rate: 9.0e-4,
+            bins: 5
+        },
+        TabNet: {
+            n_d: 43,
+            n_steps: 4,
+            gamma: 1.22,
+            cat_emb_dim: 1,
+            n_independent: 5,
+            n_shared: 4,
+            momentum: 0.235,
+            mask_type: entmax
+        },
+        VIME: {
+            p_m: 0.825,
+            K: 5,
+            alpha: 9.26,
+            beta: 0.104
+        },
+        VIMENUM: {
+            p_m: 0.825,
+            K: 5,
+            alpha: 9.26,
+            beta: 0.104,
+            bins: 5
+        },
+        TabTransformer: {
+            dim: 256,
+            depth: 6,
+            heads: 4,
+            weight_decay: -2,
+            learning_rate: -3,
+            dropout: 0.3
+        },
+        TabTransformerNUM: {
+            dim: 256,
+            depth: 6,
+            heads: 4,
+            weight_decay: -2,
+            learning_rate: -3,
+            dropout: 0.3,
+            bins: 5
+        },
+        NODE: {
+            num_layers: 2,
+            total_tree_count: 2048,
+            tree_depth: 6,
+            tree_output_dim: 3
+        },
+        DeepGBM: {
+            n_trees: 100,
+            maxleaf: 128,
+            loss_de: 5,
+            loss_dr: 0.9
+        },
+        RLN: {
+            layers: 4,
+            theta: -12,
+            log_lr: 5,
+            norm: 2
+        },
+        DNFNet: {
+            n_forumlas: 1024,
+            elastic_net_beta: 1.3
+        },
+        STG: {
+            learning_rate: 1.48e-3,
+            lam: 1.87e-3,
+            hidden_dims: [ 500, 400, 20 ]
+        },
+        STGNUM: {
+            learning_rate: 1.48e-3,
+            lam: 1.87e-3,
+            bins: 5,
+            hidden_dims: [ 500, 400, 20 ]
+        },
+        NAM: {
+            lr: 1.14e-3,
+            output_regularization: 9.1e-3,
+            dropout: 4.22e-3,
+            feature_dropout: 0.154,
+        },
+        DeepFM: {
+            dnn_dropout: 0.484,
+        },
+        DeepFMNUM: {
+            dnn_dropout: 0.484,
+            bins: 5
+        },
+        SAINT: {
+            dim: 256,
+            depth: 1,
+            heads: 2,
+            dropout: 0.6
+        },
+        SAINTNUM: {
+            dim: 256,
+            depth: 1,
+            heads: 2,
+            bins: 5,
+            dropout: 0.6
+        },
+        DANet: {
+            layer: 10,
+            base_outdim: 96,
+            k: 3,
+            drop_rate: 0
+        },
+        DANetNUM: {
+            layer: 10,
+            base_outdim: 96,
+            k: 3,
+            bins: 5,
+            drop_rate: 0
+        },
     }
 }
