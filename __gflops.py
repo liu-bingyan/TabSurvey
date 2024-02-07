@@ -18,7 +18,7 @@ class SimpleNet(nn.Module):
 
 if __name__ == "__main__":
     nepochs = 100
-    nrows = 1000
+    nrows = 100000
     in_features = 100
 
 
