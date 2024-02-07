@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.max(data,dim=1)
+    labels = torch.argmax(data, dim=1)
     print(data.shape)
     print(labels.shape)
 
@@ -68,10 +68,11 @@ if __name__ == "__main__":
     data = data.to(device)
     labels = labels.to(device)
     print(device)
+    
 
     # Define the loss function and optimizer
-    criterion = nn.MSELoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.01)
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(net.parameters(), lr=0.01)
 
     # Train the neural network
     train_timer.start()
