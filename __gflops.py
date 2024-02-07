@@ -20,18 +20,18 @@ if __name__ == "__main__":
     nepochs = 100
     nrows = 1000000
     in_features = 1000
-
+    out_features = 100
 
 
 
     # Create an instance of the neural network
-    net = SimpleNet()
+    net = SimpleNet(in_features,out_features)
     train_timer = timer.Timer()
 
 
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.randn(nrows, 1,dtype=torch.float32)
+    labels = torch.randn(nrows, out_features,dtype=torch.float32)
 
     # Use GPU for training if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
