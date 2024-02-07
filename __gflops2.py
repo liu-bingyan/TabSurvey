@@ -59,6 +59,8 @@ if __name__ == "__main__":
     # Define your training data and labels
     data = torch.randn(nrows, in_features,dtype=torch.float32)
     labels = torch.softmax(data,dim=1)
+    print(data.shape[0])
+    print(labels.shape[0])
 
     # Use GPU for training if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
