@@ -62,16 +62,6 @@ if __name__ == "__main__":
         epoch_timer.end()
 
     total_timer.end()
-    # Save the model
-    torch.save(model.state_dict(), 'model.pth')
-
-    # Test the model
-    test_input = torch.randn(1, input_size)
-    with torch.no_grad():
-        model.eval()
-        output = model(test_input)
-        print(f'Test Output: {output.item()}')
-
 
     print(f'total_timer : {total_timer.get_average_time()}')
     print(f'epoch_timer : {epoch_timer.get_average_time()}')
