@@ -1,69 +1,77 @@
 import torch
 import torch.nn as nn
-import torch.optim as optim
 from utils import timer
 
-
-# Define the neural network class
-class MLP(nn.Module):
-    def __init__(self, in_features=100, out_features=100):
-        super(MLP, self).__init__()
-        self.layer = nn.Linear(in_features, out_features)
+class LinearModel(nn.Module):
+    def __init__(self, input_size=100, hidden_dim=100):
+        super(LinearModel, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_dim)
+        self.linear2 = nn.Linear(hidden_dim, 1)
 
     def forward(self, x):
-        x = self.layer(x)
-        x = torch.relu(x)
-        return x
-
+        out = self.linear1(x)
+        out = torch.relu(out)
+        out = self.linear2(out)
+        out = torch.relu(out)
+        return out
+    
 if __name__ == "__main__":
-    # Create an instance of the neural network
+    # Generate random data
+    input_size = 100
+    hidden_dim = 100
+    num_samples = 10000
 
-    nepochs = 1000
-    nrows = 1000000
-    in_features = 100
-    out_features = 100
+    x = torch.randn(num_samples, input_size)
+    w = torch.randn(input_size, 1)
+    y = torch.sin(torch.matmul(x, w)) + torch.randn(num_samples, 1)
+    
+    # Create an instance of the LinearModel
+    model = LinearModel(input_size, hidden_dim)
 
-    # Create an instance of the neural network
-    net = MLP(in_features, out_features, hidden_dim=68, num_hidden_layers=3)
-    train_timer = timer.Timer()
+    # Move the data and model to GPU if available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    x = x.to(device)
+    y = y.to(device)
+    model = model.to(device)
+    print(f'device: {device}')
 
-
-    # Define your training data and labels
-    data = torch.randn(nrows, in_features,dtype=torch.float32)
-    labels = torch.relu(data)
-
-    # Use GPU for training if available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    net.to(device)
-    data = data.to(device)
-    labels = labels.to(device)
-    print(device)
-
-    # Define the loss function and optimizer
+    # Define loss function and optimizer
     criterion = nn.MSELoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.01)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
-    # Train the neural network
-    train_timer.start()
-    for epoch in range(nepochs):
+    total_timer = timer.Timer()
+    epoch_timer = timer.Timer()
+    # Train the model
+    num_epochs = 1000
+    total_timer.start()
+    for epoch in range(num_epochs):
+        epoch_timer.start()
+        # Forward pass
+        outputs = model(x)
+        loss = criterion(outputs, y)
+
+        # Backward and optimize
         optimizer.zero_grad()
-        outputs = net(data)
-        loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
 
-        print(f"Epoch {epoch+1}/{nepochs}, Loss: {loss.item()}")
+        # Print progress
+        if (epoch+1) % 10 == 0:
+            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
-    # Calculate the error
+        epoch_timer.end()
+
+    total_timer.end()
+    # Save the model
+    torch.save(model.state_dict(), 'model.pth')
+
+    # Test the model
+    test_input = torch.randn(1, input_size)
     with torch.no_grad():
-        predictions = net(data)
-        error = criterion(predictions, labels)
-        print(f"Error: {error.item()}")
+        model.eval()
+        output = model(test_input)
+        print(f'Test Output: {output.item()}')
 
-    train_timer.end()
-    print(f'Total time spent: {train_timer.get_average_time()}')
 
-    # Output the parameters of the network
-    for name, param in net.named_parameters():
-        print(f"Parameter name: {name}, Value: {param}")
-    print("Finished Training")
+    print(f'total_timer : {total_timer.get_average_time()}')
+    print(f'epoch_timer : {epoch_timer.get_average_time()}')
