@@ -34,7 +34,8 @@ class BaseModelTorch(BaseModel):
             device = 'cpu'
 
         return torch.device(device)
-  
+
+    @profile    
     def fit(self, X, y, X_val=None, y_val=None):
         optimizer = optim.AdamW(self.model.parameters(), lr=self.params["learning_rate"])
 
