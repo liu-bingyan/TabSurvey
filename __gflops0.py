@@ -28,11 +28,12 @@ def run(args):
     num_connections  = hidden_dim*(input_size+hidden_dim)
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
     print(f"GFLO is {GFLO:.2f}")
-    print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOP machine")
+    print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
 
     # Create dummy data
     x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.1)
     x = torch.tensor(x, dtype=torch.float32)
+    y = y.reshape(-1, 1)
     y = torch.tensor(y, dtype=torch.float32)
     # Create an instance of the LinearModel
     model = LinearModel(input_size, hidden_dim)
@@ -73,10 +74,8 @@ def run(args):
     # Test the model
     model.eval()
     with torch.no_grad():
-        test_x = torch.randn(100, input_size).to(device)
-        test_y = torch.sin(torch.matmul(test_x, w)) + torch.randn(100, 1).to(device)
-        test_outputs = model(test_x)
-        test_loss = criterion(test_outputs, test_y)
+        test_outputs = model(x)
+        test_loss = criterion(test_outputs, y)
         print(f'Test Loss: {test_loss.item():.4f}')
 
     print(f'total_timer : {total_timer.get_average_time()}')
