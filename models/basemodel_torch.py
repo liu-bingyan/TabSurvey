@@ -70,9 +70,9 @@ class BaseModelTorch(BaseModel):
         val_loss_history = []
 
         for epoch in range(self.args.epochs):
-            for i, (batch_X, batch_y) in enumerate(train_loader):
+            for i, (batch_X, batch_y) in enumerate(train_loader): # costy
 
-                out = self.model(batch_X.to(self.device))
+                out = self.model(batch_X.to(self.device)) # costy
 
                 if self.args.objective == "regression" or self.args.objective == "binary":
                     out = out.squeeze()
@@ -81,8 +81,8 @@ class BaseModelTorch(BaseModel):
                 loss_history.append(loss.item())
 
                 optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
+                loss.backward() # costy
+                optimizer.step() # costy
 
             # Early Stopping
             val_loss = 0.0

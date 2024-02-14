@@ -22,7 +22,7 @@ class LinearModel(nn.Module):
 def run(args):
     input_size = 54
     hidden_dim = 100
-    num_samples = 50000
+    num_samples = 500000
     num_epochs = 300
 
     num_connections  = hidden_dim*(input_size+hidden_dim)
