@@ -71,7 +71,7 @@ def run(args):
     print(f'device: {device}')
 
     criterion = nn.MSELoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
     
     total_timer = timer.Timer()
     epoch_timer = timer.Timer()
@@ -89,7 +89,7 @@ def run(args):
         optimizer.step()
 
         # Print progress
-        if (epoch+1) % 1 == 0:
+        if (epoch+1) % 10 == 0:
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
