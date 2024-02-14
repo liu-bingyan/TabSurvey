@@ -42,9 +42,10 @@ class MLP(nn.Module):
 @profile
 def run(args):
     input_size = 54
-    hidden_dim = 68
-    num_samples = 10000
+    hidden_dim = 99
+    num_samples = 500000
     num_epochs = 300
+    learning_rate = 7.0e-4
 
     # Create an instance of the LinearModel
    # model = LinearModel(input_size, hidden_dim)
@@ -71,7 +72,7 @@ def run(args):
     print(f'device: {device}')
 
     criterion = nn.MSELoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
     
     total_timer = timer.Timer()
     epoch_timer = timer.Timer()
