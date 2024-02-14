@@ -49,7 +49,7 @@ def run(args):
     # Create an instance of the LinearModel
    # model = LinearModel(input_size, hidden_dim)
     
-    model = LinearModel(input_size, hidden_dim, num_hidden_layers=3)
+    model = LinearModel(input_size, hidden_dim)
 
     num_connections  = model.connections
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
