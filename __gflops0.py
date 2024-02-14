@@ -31,7 +31,7 @@ def run(args):
     print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
 
     # Create dummy data
-    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.1)
+    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.001)
     x = torch.tensor(x, dtype=torch.float32)
     y = y.reshape(-1, 1)
     y = torch.tensor(y, dtype=torch.float32)
@@ -64,7 +64,7 @@ def run(args):
         optimizer.step()
 
         # Print progress
-        if (epoch+1) % 10 == 0:
+        if (epoch+1) % 1 == 0:
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
