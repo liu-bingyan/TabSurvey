@@ -11,6 +11,8 @@ class LinearModel(nn.Module):
         self.linear1 = nn.Linear(input_size, hidden_dim)
         self.linear2 = nn.Linear(hidden_dim, 1)
 
+        self.connections = hidden_dim*(input_size+hidden_dim)
+
     def forward(self, x):
         out = self.linear1(x)
         out = torch.relu(out)
@@ -18,14 +20,38 @@ class LinearModel(nn.Module):
         out = torch.relu(out)
         return out
 
+class MLP(nn.Module):
+    def __init__(self, in_features=100,hidden_dim=68, num_hidden_layers=3):
+        super(MLP, self).__init__()
+        self.layers = nn.ModuleList()
+        self.layers.append(nn.Linear(in_features, hidden_dim))
+        self.layers.append(nn.ReLU())
+        for _ in range(num_hidden_layers - 1):
+            self.layers.append(nn.Linear(hidden_dim, hidden_dim))
+            self.layers.append(nn.ReLU())
+        self.layers.append(nn.Linear(hidden_dim, 1))
+        self.layers.append(nn.ReLU())
+
+        self.connections = (num_hidden_layers-1)* hidden_dim**2 + hidden_dim*(in_features+1)
+
+    def forward(self, x):
+        for layer in self.layers:
+            x = layer(x)
+        return x
+
 
 def run(args):
     input_size = 54
-    hidden_dim = 100
+    hidden_dim = 68
     num_samples = 1000000
     num_epochs = 300
 
-    num_connections  = hidden_dim*(input_size+hidden_dim)
+    # Create an instance of the LinearModel
+   # model = LinearModel(input_size, hidden_dim)
+    
+    model = MLP(input_size, hidden_dim, num_hidden_layers=3)
+
+    num_connections  = model.connections
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
     print(f"GFLO is {GFLO:.2f}")
     print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
@@ -35,8 +61,7 @@ def run(args):
     x = torch.tensor(x, dtype=torch.float32)
     y = y.reshape(-1, 1)
     y = torch.tensor(y, dtype=torch.float32)
-    # Create an instance of the LinearModel
-    model = LinearModel(input_size, hidden_dim)
+
 
     # Move the data and model to GPU if available
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
