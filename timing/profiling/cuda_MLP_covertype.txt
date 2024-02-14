@@ -1,0 +1,667 @@
+Namespace(config='config/covertype.yml', model_name='MLP', dataset='Covertype', objective='classification', use_gpu=True, gpu_ids=[0, 1], data_parallel=False, optimize_hyperparameters=False, n_trials=5, direction='minimize', num_splits=5, shuffle=True, seed=221, scale=True, target_encode=True, one_hot_encode=False, batch_size=128, val_batch_size=256, early_stopping_rounds=20, epochs=400, logging_period=100, num_features=54, num_classes=7, cat_idx=None, cat_dims=None)
+Train model with given hyperparameters
+Loading dataset Covertype...
+Dataset loaded!
+(581012, 54)
+Having 7 classes as target.
+Scaling the data...
+On Device: cuda
+On Device: cuda
+Epoch 0, Val Loss: 1.67330
+Epoch 1, Val Loss: 1.57784
+Epoch 2, Val Loss: 1.58453
+Epoch 3, Val Loss: 1.87282
+Epoch 4, Val Loss: 1.51344
+Epoch 5, Val Loss: 1.52684
+Epoch 6, Val Loss: 1.52776
+Epoch 7, Val Loss: 1.50657
+Epoch 8, Val Loss: 1.48605
+Epoch 9, Val Loss: 1.49675
+Epoch 10, Val Loss: 1.52145
+Epoch 11, Val Loss: 1.49679
+Epoch 12, Val Loss: 1.50341
+Epoch 13, Val Loss: 1.85670
+Epoch 14, Val Loss: 1.48643
+Epoch 15, Val Loss: 1.47854
+Epoch 16, Val Loss: 1.48129
+Epoch 17, Val Loss: 1.48921
+Epoch 18, Val Loss: 1.47912
+Epoch 19, Val Loss: 1.47694
+Epoch 20, Val Loss: 1.45922
+Epoch 21, Val Loss: 1.47800
+Epoch 22, Val Loss: 1.46735
+Epoch 23, Val Loss: 1.47629
+Epoch 24, Val Loss: 1.47910
+Epoch 25, Val Loss: 1.46360
+Epoch 26, Val Loss: 1.46899
+Epoch 27, Val Loss: 1.47437
+Epoch 28, Val Loss: 1.46445
+Epoch 29, Val Loss: 1.48112
+Epoch 30, Val Loss: 1.47182
+Epoch 31, Val Loss: 1.47113
+Epoch 32, Val Loss: 1.46701
+Epoch 33, Val Loss: 1.77288
+Epoch 34, Val Loss: 1.46563
+Epoch 35, Val Loss: 1.65432
+Epoch 36, Val Loss: 1.48747
+Epoch 37, Val Loss: 1.59495
+Epoch 38, Val Loss: 1.48134
+Epoch 39, Val Loss: 1.48338
+Epoch 40, Val Loss: 1.46321
+Epoch 41, Val Loss: 1.47109
+Validation loss has not improved for 20 steps!
+Early stopping applies.
+{'Log Loss - mean': 4.548336431834885, 'Log Loss - std': 0.0, 'AUC - mean': 0.5965557802974157, 'AUC - std': 0.0, 'Accuracy - mean': 0.706203798524995, 'Accuracy - std': 0.0, 'F1 score - mean': 0.67326928936988, 'F1 score - std': 0.0}
+On Device: cuda
+Epoch 0, Val Loss: 1.56522
+Epoch 1, Val Loss: 1.54525
+Epoch 2, Val Loss: 1.56003
+Epoch 3, Val Loss: 1.51526
+Epoch 4, Val Loss: 1.52538
+Epoch 5, Val Loss: 1.54887
+Epoch 6, Val Loss: 1.52309
+Epoch 7, Val Loss: 1.52099
+Epoch 8, Val Loss: 1.54517
+Epoch 9, Val Loss: 1.80088
+Epoch 10, Val Loss: 1.80088
+Epoch 11, Val Loss: 1.80088
+Epoch 12, Val Loss: 1.80088
+Epoch 13, Val Loss: 1.54905
+Epoch 14, Val Loss: 1.52225
+Epoch 15, Val Loss: 1.52475
+Epoch 16, Val Loss: 1.51718
+Epoch 17, Val Loss: 1.52138
+Epoch 18, Val Loss: 1.51758
+Epoch 19, Val Loss: 1.51280
+Epoch 20, Val Loss: 1.80088
+Epoch 21, Val Loss: 1.80088
+Epoch 22, Val Loss: 1.50969
+Epoch 23, Val Loss: 1.51870
+Epoch 24, Val Loss: 1.51486
+Epoch 25, Val Loss: 1.52014
+Epoch 26, Val Loss: 1.52449
+Epoch 27, Val Loss: 1.50826
+Epoch 28, Val Loss: 1.50755
+Epoch 29, Val Loss: 1.51110
+Epoch 30, Val Loss: 1.51213
+Epoch 31, Val Loss: 1.51444
+Epoch 32, Val Loss: 1.52052
+Epoch 33, Val Loss: 1.51492
+Epoch 34, Val Loss: 1.51447
+Epoch 35, Val Loss: 1.51352
+Epoch 36, Val Loss: 1.51611
+Epoch 37, Val Loss: 1.50263
+Epoch 38, Val Loss: 1.51988
+Epoch 39, Val Loss: 1.51208
+Epoch 40, Val Loss: 1.51085
+Epoch 41, Val Loss: 1.51196
+Epoch 42, Val Loss: 1.51252
+Epoch 43, Val Loss: 1.51223
+Epoch 44, Val Loss: 1.51397
+Epoch 45, Val Loss: 1.50499
+Epoch 46, Val Loss: 1.51058
+Epoch 47, Val Loss: 1.51538
+Epoch 48, Val Loss: 1.50280
+Epoch 49, Val Loss: 1.51310
+Epoch 50, Val Loss: 1.50851
+Epoch 51, Val Loss: 1.50636
+Epoch 52, Val Loss: 1.50568
+Epoch 53, Val Loss: 1.51047
+Epoch 54, Val Loss: 1.50695
+Epoch 55, Val Loss: 1.51065
+Epoch 56, Val Loss: 1.50100
+Epoch 57, Val Loss: 1.51278
+Epoch 58, Val Loss: 1.51126
+Epoch 59, Val Loss: 1.51911
+Epoch 60, Val Loss: 1.51358
+Epoch 61, Val Loss: 1.50944
+Epoch 62, Val Loss: 1.52038
+Epoch 63, Val Loss: 1.51713
+Epoch 64, Val Loss: 1.52290
+Epoch 65, Val Loss: 1.51641
+Epoch 66, Val Loss: 1.51991
+Epoch 67, Val Loss: 1.51397
+Epoch 68, Val Loss: 1.50322
+Epoch 69, Val Loss: 1.51108
+Epoch 70, Val Loss: 1.50152
+Epoch 71, Val Loss: 1.51184
+Epoch 72, Val Loss: 1.50423
+Epoch 73, Val Loss: 1.50962
+Epoch 74, Val Loss: 1.50187
+Epoch 75, Val Loss: 1.49912
+Epoch 76, Val Loss: 1.50007
+Epoch 77, Val Loss: 1.49977
+Epoch 78, Val Loss: 1.50825
+Epoch 79, Val Loss: 1.49720
+Epoch 80, Val Loss: 1.49694
+Epoch 81, Val Loss: 1.50992
+Epoch 82, Val Loss: 1.50424
+Epoch 83, Val Loss: 1.50196
+Epoch 84, Val Loss: 1.49966
+Epoch 85, Val Loss: 1.49331
+Epoch 86, Val Loss: 1.49429
+Epoch 87, Val Loss: 1.49959
+Epoch 88, Val Loss: 1.49869
+Epoch 89, Val Loss: 1.50051
+Epoch 90, Val Loss: 1.49364
+Epoch 91, Val Loss: 1.49722
+Epoch 92, Val Loss: 1.49527
+Epoch 93, Val Loss: 1.49500
+Epoch 94, Val Loss: 1.50195
+Epoch 95, Val Loss: 1.50228
+Epoch 96, Val Loss: 1.49137
+Epoch 97, Val Loss: 1.49924
+Epoch 98, Val Loss: 1.49320
+Epoch 99, Val Loss: 1.48739
+Epoch 100, Val Loss: 1.49499
+Epoch 101, Val Loss: 1.48353
+Epoch 102, Val Loss: 1.48771
+Epoch 103, Val Loss: 1.49788
+Epoch 104, Val Loss: 1.49064
+Epoch 105, Val Loss: 1.49094
+Epoch 106, Val Loss: 1.49180
+Epoch 107, Val Loss: 1.48777
+Epoch 108, Val Loss: 1.48476
+Epoch 109, Val Loss: 1.48465
+Epoch 110, Val Loss: 1.48784
+Epoch 111, Val Loss: 1.48820
+Epoch 112, Val Loss: 1.47767
+Epoch 113, Val Loss: 1.47572
+Epoch 114, Val Loss: 1.48377
+Epoch 115, Val Loss: 1.48573
+Epoch 116, Val Loss: 1.47470
+Epoch 117, Val Loss: 1.48111
+Epoch 118, Val Loss: 1.47284
+Epoch 119, Val Loss: 1.48323
+Epoch 120, Val Loss: 1.48096
+Epoch 121, Val Loss: 1.48596
+Epoch 122, Val Loss: 1.47739
+Epoch 123, Val Loss: 1.48310
+Epoch 124, Val Loss: 1.47878
+Epoch 125, Val Loss: 1.47392
+Epoch 126, Val Loss: 1.48510
+Epoch 127, Val Loss: 1.47500
+Epoch 128, Val Loss: 1.47950
+Epoch 129, Val Loss: 1.48240
+Epoch 130, Val Loss: 1.47502
+Epoch 131, Val Loss: 1.47725
+Epoch 132, Val Loss: 1.47183
+Epoch 133, Val Loss: 1.47486
+Epoch 134, Val Loss: 1.46613
+Epoch 135, Val Loss: 1.46973
+Epoch 136, Val Loss: 1.46384
+Epoch 137, Val Loss: 1.46673
+Epoch 138, Val Loss: 1.46974
+Epoch 139, Val Loss: 1.48131
+Epoch 140, Val Loss: 1.46499
+Epoch 141, Val Loss: 1.46175
+Epoch 142, Val Loss: 1.46766
+Epoch 143, Val Loss: 1.47350
+Epoch 144, Val Loss: 1.46917
+Epoch 145, Val Loss: 1.47313
+Epoch 146, Val Loss: 1.47132
+Epoch 147, Val Loss: 1.46170
+Epoch 148, Val Loss: 1.46930
+Epoch 149, Val Loss: 1.47041
+Epoch 150, Val Loss: 1.46857
+Epoch 151, Val Loss: 1.47735
+Epoch 152, Val Loss: 1.45880
+Epoch 153, Val Loss: 1.47747
+Epoch 154, Val Loss: 1.46475
+Epoch 155, Val Loss: 1.48232
+Epoch 156, Val Loss: 1.46287
+Epoch 157, Val Loss: 1.46535
+Epoch 158, Val Loss: 1.46531
+Epoch 159, Val Loss: 1.46046
+Epoch 160, Val Loss: 1.46556
+Epoch 161, Val Loss: 1.46104
+Epoch 162, Val Loss: 1.47776
+Epoch 163, Val Loss: 1.46568
+Epoch 164, Val Loss: 1.46054
+Epoch 165, Val Loss: 1.46325
+Epoch 166, Val Loss: 1.46390
+Epoch 167, Val Loss: 1.47525
+Epoch 168, Val Loss: 1.47041
+Epoch 169, Val Loss: 1.46455
+Epoch 170, Val Loss: 1.46013
+Epoch 171, Val Loss: 1.47499
+Epoch 172, Val Loss: 1.46890
+Epoch 173, Val Loss: 1.46889
+Validation loss has not improved for 20 steps!
+Early stopping applies.
+{'Log Loss - mean': 4.247774278160868, 'Log Loss - std': 0.3005621536740164, 'AUC - mean': 0.5654474062130662, 'AUC - std': 0.03110837408434952, 'Accuracy - mean': 0.7060704112630483, 'Accuracy - std': 0.0001333872619467824, 'F1 score - mean': 0.6682617716835657, 'F1 score - std': 0.0050075176863143}
+On Device: cuda
+Epoch 0, Val Loss: 1.62827
+Epoch 1, Val Loss: 1.60232
+Epoch 2, Val Loss: 1.56260
+Epoch 3, Val Loss: 1.52672
+Epoch 4, Val Loss: 1.54381
+Epoch 5, Val Loss: 1.57694
+Epoch 6, Val Loss: 1.56328
+Epoch 7, Val Loss: 1.53964
+Epoch 8, Val Loss: 1.53093
+Epoch 9, Val Loss: 1.53680
+Epoch 10, Val Loss: 1.53409
+Epoch 11, Val Loss: 1.54960
+Epoch 12, Val Loss: 1.54250
+Epoch 13, Val Loss: 1.53461
+Epoch 14, Val Loss: 1.52986
+Epoch 15, Val Loss: 1.52526
+Epoch 16, Val Loss: 1.51895
+Epoch 17, Val Loss: 1.51953
+Epoch 18, Val Loss: 1.52782
+Epoch 19, Val Loss: 1.51550
+Epoch 20, Val Loss: 1.51329
+Epoch 21, Val Loss: 1.51880
+Epoch 22, Val Loss: 1.51267
+Epoch 23, Val Loss: 1.51973
+Epoch 24, Val Loss: 1.51117
+Epoch 25, Val Loss: 1.51789
+Epoch 26, Val Loss: 1.51876
+Epoch 27, Val Loss: 1.51588
+Epoch 28, Val Loss: 1.51462
+Epoch 29, Val Loss: 1.51568
+Epoch 30, Val Loss: 1.51882
+Epoch 31, Val Loss: 1.51017
+Epoch 32, Val Loss: 1.51852
+Epoch 33, Val Loss: 1.50619
+Epoch 34, Val Loss: 1.50684
+Epoch 35, Val Loss: 1.51184
+Epoch 36, Val Loss: 1.52011
+Epoch 37, Val Loss: 1.51301
+Epoch 38, Val Loss: 1.51317
+Epoch 39, Val Loss: 1.51195
+Epoch 40, Val Loss: 1.51719
+Epoch 41, Val Loss: 1.51328
+Epoch 42, Val Loss: 1.51664
+Epoch 43, Val Loss: 1.51818
+Epoch 44, Val Loss: 1.51244
+Epoch 45, Val Loss: 1.51488
+Epoch 46, Val Loss: 1.51245
+Epoch 47, Val Loss: 1.51990
+Epoch 48, Val Loss: 1.51922
+Epoch 49, Val Loss: 1.50844
+Epoch 50, Val Loss: 1.51544
+Epoch 51, Val Loss: 1.52727
+Epoch 52, Val Loss: 1.51695
+Epoch 53, Val Loss: 1.50823
+Epoch 54, Val Loss: 1.50675
+Validation loss has not improved for 20 steps!
+Early stopping applies.
+{'Log Loss - mean': 4.55414870029192, 'Log Loss - std': 0.4979514486571093, 'AUC - mean': 0.5555231643696575, 'AUC - std': 0.029019564281948594, 'Accuracy - mean': 0.6903426443009515, 'Accuracy - std': 0.02224268798210211, 'F1 score - mean': 0.6464266023065285, 'F1 score - std': 0.031149094139321452}
+On Device: cuda
+Epoch 0, Val Loss: 1.57057
+Epoch 1, Val Loss: 1.53636
+Epoch 2, Val Loss: 1.53006
+Epoch 3, Val Loss: 1.52261
+Epoch 4, Val Loss: 1.80088
+Epoch 5, Val Loss: 1.80088
+Epoch 6, Val Loss: 1.53130
+Epoch 7, Val Loss: 1.80088
+Epoch 8, Val Loss: 1.53299
+Epoch 9, Val Loss: 1.52284
+Epoch 10, Val Loss: 1.52845
+Epoch 11, Val Loss: 1.52439
+Epoch 12, Val Loss: 1.51488
+Epoch 13, Val Loss: 1.52994
+Epoch 14, Val Loss: 1.51642
+Epoch 15, Val Loss: 1.51831
+Epoch 16, Val Loss: 1.51323
+Epoch 17, Val Loss: 1.52034
+Epoch 18, Val Loss: 1.51762
+Epoch 19, Val Loss: 1.51483
+Epoch 20, Val Loss: 1.50908
+Epoch 21, Val Loss: 1.51614
+Epoch 22, Val Loss: 1.50777
+Epoch 23, Val Loss: 1.51421
+Epoch 24, Val Loss: 1.52251
+Epoch 25, Val Loss: 1.50313
+Epoch 26, Val Loss: 1.50977
+Epoch 27, Val Loss: 1.50675
+Epoch 28, Val Loss: 1.50709
+Epoch 29, Val Loss: 1.50532
+Epoch 30, Val Loss: 1.50498
+Epoch 31, Val Loss: 1.50646
+Epoch 32, Val Loss: 1.50533
+Epoch 33, Val Loss: 1.51016
+Epoch 34, Val Loss: 1.49854
+Epoch 35, Val Loss: 1.50567
+Epoch 36, Val Loss: 1.49994
+Epoch 37, Val Loss: 1.50041
+Epoch 38, Val Loss: 1.50025
+Epoch 39, Val Loss: 1.50331
+Epoch 40, Val Loss: 1.50919
+Epoch 41, Val Loss: 1.51178
+Epoch 42, Val Loss: 1.50158
+Epoch 43, Val Loss: 1.50961
+Epoch 44, Val Loss: 1.51121
+Epoch 45, Val Loss: 1.49570
+Epoch 46, Val Loss: 1.50502
+Epoch 47, Val Loss: 1.49757
+Epoch 48, Val Loss: 1.51277
+Epoch 49, Val Loss: 1.49897
+Epoch 50, Val Loss: 1.49866
+Epoch 51, Val Loss: 1.51189
+Epoch 52, Val Loss: 1.50104
+Epoch 53, Val Loss: 1.50795
+Epoch 54, Val Loss: 1.49530
+Epoch 55, Val Loss: 1.49421
+Epoch 56, Val Loss: 1.49000
+Epoch 57, Val Loss: 1.50175
+Epoch 58, Val Loss: 1.49992
+Epoch 59, Val Loss: 1.49282
+Epoch 60, Val Loss: 1.49276
+Epoch 61, Val Loss: 1.49924
+Epoch 62, Val Loss: 1.49842
+Epoch 63, Val Loss: 1.49484
+Epoch 64, Val Loss: 1.49982
+Epoch 65, Val Loss: 1.49980
+Epoch 66, Val Loss: 1.49230
+Epoch 67, Val Loss: 1.50077
+Epoch 68, Val Loss: 1.48666
+Epoch 69, Val Loss: 1.49457
+Epoch 70, Val Loss: 1.49657
+Epoch 71, Val Loss: 1.49676
+Epoch 72, Val Loss: 1.49676
+Epoch 73, Val Loss: 1.49129
+Epoch 74, Val Loss: 1.49600
+Epoch 75, Val Loss: 1.49069
+Epoch 76, Val Loss: 1.49405
+Epoch 77, Val Loss: 1.48914
+Epoch 78, Val Loss: 1.49085
+Epoch 79, Val Loss: 1.48484
+Epoch 80, Val Loss: 1.50949
+Epoch 81, Val Loss: 1.49202
+Epoch 82, Val Loss: 1.47753
+Epoch 83, Val Loss: 1.48914
+Epoch 84, Val Loss: 1.49445
+Epoch 85, Val Loss: 1.49526
+Epoch 86, Val Loss: 1.48868
+Epoch 87, Val Loss: 1.49046
+Epoch 88, Val Loss: 1.48758
+Epoch 89, Val Loss: 1.48567
+Epoch 90, Val Loss: 1.49237
+Epoch 91, Val Loss: 1.49220
+Epoch 92, Val Loss: 1.49133
+Epoch 93, Val Loss: 1.47852
+Epoch 94, Val Loss: 1.47994
+Epoch 95, Val Loss: 1.48831
+Epoch 96, Val Loss: 1.48903
+Epoch 97, Val Loss: 1.48317
+Epoch 98, Val Loss: 1.49389
+Epoch 99, Val Loss: 1.51267
+Epoch 100, Val Loss: 1.48977
+Epoch 101, Val Loss: 1.48340
+Epoch 102, Val Loss: 1.48760
+Epoch 103, Val Loss: 1.48616
+Validation loss has not improved for 20 steps!
+Early stopping applies.
+{'Log Loss - mean': 4.549076895494264, 'Log Loss - std': 0.4313280694859794, 'AUC - mean': 0.5477840375866407, 'AUC - std': 0.02848304027709185, 'Accuracy - mean': 0.6896150407462383, 'Accuracy - std': 0.019303914040949215, 'F1 score - mean': 0.6427921014732569, 'F1 score - std': 0.027700692016561338}
+On Device: cuda
+Epoch 0, Val Loss: 1.61877
+Epoch 1, Val Loss: 1.57146
+Epoch 2, Val Loss: 1.58277
+Epoch 3, Val Loss: 1.55516
+Epoch 4, Val Loss: 1.55487
+Epoch 5, Val Loss: 1.54963
+Epoch 6, Val Loss: 1.53396
+Epoch 7, Val Loss: 1.80088
+Epoch 8, Val Loss: 1.53294
+Epoch 9, Val Loss: 1.54273
+Epoch 10, Val Loss: 1.53524
+Epoch 11, Val Loss: 1.51360
+Epoch 12, Val Loss: 1.51866
+Epoch 13, Val Loss: 1.52399
+Epoch 14, Val Loss: 1.52068
+Epoch 15, Val Loss: 1.53036
+Epoch 16, Val Loss: 1.52813
+Epoch 17, Val Loss: 1.51647
+Epoch 18, Val Loss: 1.52448
+Epoch 19, Val Loss: 1.52559
+Epoch 20, Val Loss: 1.52758
+Epoch 21, Val Loss: 1.51173
+Epoch 22, Val Loss: 1.51454
+Epoch 23, Val Loss: 1.50961
+Epoch 24, Val Loss: 1.51592
+Epoch 25, Val Loss: 1.52215
+Epoch 26, Val Loss: 1.50920
+Epoch 27, Val Loss: 1.50781
+Epoch 28, Val Loss: 1.51533
+Epoch 29, Val Loss: 1.51880
+Epoch 30, Val Loss: 1.50860
+Epoch 31, Val Loss: 1.51080
+Epoch 32, Val Loss: 1.50556
+Epoch 33, Val Loss: 1.51251
+Epoch 34, Val Loss: 1.52374
+Epoch 35, Val Loss: 1.50800
+Epoch 36, Val Loss: 1.51137
+Epoch 37, Val Loss: 1.50981
+Epoch 38, Val Loss: 1.50556
+Epoch 39, Val Loss: 1.50426
+Epoch 40, Val Loss: 1.50893
+Epoch 41, Val Loss: 1.51507
+Epoch 42, Val Loss: 1.50217
+Epoch 43, Val Loss: 1.51021
+Epoch 44, Val Loss: 1.50875
+Epoch 45, Val Loss: 1.50693
+Epoch 46, Val Loss: 1.50769
+Epoch 47, Val Loss: 1.50080
+Epoch 48, Val Loss: 1.50135
+Epoch 49, Val Loss: 1.50829
+Epoch 50, Val Loss: 1.50190
+Epoch 51, Val Loss: 1.50200
+Epoch 52, Val Loss: 1.49540
+Epoch 53, Val Loss: 1.49084
+Epoch 54, Val Loss: 1.49465
+Epoch 55, Val Loss: 1.50159
+Epoch 56, Val Loss: 1.50895
+Epoch 57, Val Loss: 1.49464
+Epoch 58, Val Loss: 1.49944
+Epoch 59, Val Loss: 1.49258
+Epoch 60, Val Loss: 1.49919
+Epoch 61, Val Loss: 1.49797
+Epoch 62, Val Loss: 1.50449
+Epoch 63, Val Loss: 1.49721
+Epoch 64, Val Loss: 1.50746
+Epoch 65, Val Loss: 1.49815
+Epoch 66, Val Loss: 1.49639
+Epoch 67, Val Loss: 1.50865
+Epoch 68, Val Loss: 1.50844
+Epoch 69, Val Loss: 1.50287
+Epoch 70, Val Loss: 1.50153
+Epoch 71, Val Loss: 1.51419
+Epoch 72, Val Loss: 1.50215
+Epoch 73, Val Loss: 1.50429
+Epoch 74, Val Loss: 1.49057
+Epoch 75, Val Loss: 1.50176
+Epoch 76, Val Loss: 1.49605
+Epoch 77, Val Loss: 1.50329
+Epoch 78, Val Loss: 1.49766
+Epoch 79, Val Loss: 1.50120
+Epoch 80, Val Loss: 1.49532
+Epoch 81, Val Loss: 1.49343
+Epoch 82, Val Loss: 1.49797
+Epoch 83, Val Loss: 1.50403
+Epoch 84, Val Loss: 1.49789
+Epoch 85, Val Loss: 1.50308
+Epoch 86, Val Loss: 1.48355
+Epoch 87, Val Loss: 1.48956
+Epoch 88, Val Loss: 1.48688
+Epoch 89, Val Loss: 1.50104
+Epoch 90, Val Loss: 1.49568
+Epoch 91, Val Loss: 1.49481
+Epoch 92, Val Loss: 1.50020
+Epoch 93, Val Loss: 1.48888
+Epoch 94, Val Loss: 1.48919
+Epoch 95, Val Loss: 1.48213
+Epoch 96, Val Loss: 1.48472
+Epoch 97, Val Loss: 1.48286
+Epoch 98, Val Loss: 1.49797
+Epoch 99, Val Loss: 1.48478
+Epoch 100, Val Loss: 1.49416
+Epoch 101, Val Loss: 1.49461
+Epoch 102, Val Loss: 1.48499
+Epoch 103, Val Loss: 1.50192
+Epoch 104, Val Loss: 1.48920
+Epoch 105, Val Loss: 1.49084
+Epoch 106, Val Loss: 1.49302
+Epoch 107, Val Loss: 1.49007
+Epoch 108, Val Loss: 1.49016
+Epoch 109, Val Loss: 1.48166
+Epoch 110, Val Loss: 1.49416
+Epoch 111, Val Loss: 1.48914
+Epoch 112, Val Loss: 1.48381
+Epoch 113, Val Loss: 1.48583
+Epoch 114, Val Loss: 1.48165
+Epoch 115, Val Loss: 1.48888
+Epoch 116, Val Loss: 1.49169
+Epoch 117, Val Loss: 1.49948
+Epoch 118, Val Loss: 1.49446
+Epoch 119, Val Loss: 1.48650
+Epoch 120, Val Loss: 1.48962
+Epoch 121, Val Loss: 1.50058
+Epoch 122, Val Loss: 1.49482
+Epoch 123, Val Loss: 1.48852
+Epoch 124, Val Loss: 1.48541
+Epoch 125, Val Loss: 1.48505
+Epoch 126, Val Loss: 1.48907
+Epoch 127, Val Loss: 1.48238
+Epoch 128, Val Loss: 1.48877
+Epoch 129, Val Loss: 1.48328
+Epoch 130, Val Loss: 1.49010
+Epoch 131, Val Loss: 1.48334
+Epoch 132, Val Loss: 1.47838
+Epoch 133, Val Loss: 1.48085
+Epoch 134, Val Loss: 1.48248
+Epoch 135, Val Loss: 1.48683
+Epoch 136, Val Loss: 1.48538
+Epoch 137, Val Loss: 1.48735
+Epoch 138, Val Loss: 1.49113
+Epoch 139, Val Loss: 1.48177
+Epoch 140, Val Loss: 1.48431
+Epoch 141, Val Loss: 1.49309
+Epoch 142, Val Loss: 1.49093
+Epoch 143, Val Loss: 1.48737
+Epoch 144, Val Loss: 1.47972
+Epoch 145, Val Loss: 1.48915
+Epoch 146, Val Loss: 1.48752
+Epoch 147, Val Loss: 1.48096
+Epoch 148, Val Loss: 1.47560
+Epoch 149, Val Loss: 1.47262
+Epoch 150, Val Loss: 1.48768
+Epoch 151, Val Loss: 1.48556
+Epoch 152, Val Loss: 1.48206
+Epoch 153, Val Loss: 1.47680
+Epoch 154, Val Loss: 1.49231
+Epoch 155, Val Loss: 1.48120
+Epoch 156, Val Loss: 1.48066
+Epoch 157, Val Loss: 1.48521
+Epoch 158, Val Loss: 1.48643
+Epoch 159, Val Loss: 1.47592
+Epoch 160, Val Loss: 1.48335
+Epoch 161, Val Loss: 1.49026
+Epoch 162, Val Loss: 1.47534
+Epoch 163, Val Loss: 1.48600
+Epoch 164, Val Loss: 1.47830
+Epoch 165, Val Loss: 1.48234
+Epoch 166, Val Loss: 1.48767
+Epoch 167, Val Loss: 1.47551
+Epoch 168, Val Loss: 1.47392
+Epoch 169, Val Loss: 1.47981
+Epoch 170, Val Loss: 1.47500
+Validation loss has not improved for 20 steps!
+Early stopping applies.
+{'Log Loss - mean': 4.46572695705505, 'Log Loss - std': 0.4202665484814181, 'AUC - mean': 0.5339709138676665, 'AUC - std': 0.03757973408958479, 'Accuracy - mean': 0.6900889620818532, 'Accuracy - std': 0.017291942735554303, 'F1 score - mean': 0.6414467599872291, 'F1 score - std': 0.024921927000399052}
+{'Log Loss - mean': 4.46572695705505, 'Log Loss - std': 0.4202665484814181, 'AUC - mean': 0.5339709138676665, 'AUC - std': 0.03757973408958479, 'Accuracy - mean': 0.6900889620818532, 'Accuracy - std': 0.017291942735554303, 'F1 score - mean': 0.6414467599872291, 'F1 score - std': 0.024921927000399052}
+(2487.02103402, 0.8211251200000106)
+Wrote profile results to train_timing.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 13438.7 s
+File: /opt/notebooks/models/basemodel_torch.py
+Function: fit at line 38
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    38                                               @profile    
+    39                                               def fit(self, X, y, X_val=None, y_val=None):
+    40         5       1100.8    220.2      0.0          optimizer = optim.AdamW(self.model.parameters(), lr=self.params["learning_rate"])
+    41                                           
+    42         5      62648.2  12529.6      0.0          X = torch.tensor(X).float()
+    43         5      16429.7   3285.9      0.0          X_val = torch.tensor(X_val).float()
+    44                                           
+    45         5       5354.8   1071.0      0.0          y = torch.tensor(y)
+    46         5        691.9    138.4      0.0          y_val = torch.tensor(y_val)
+    47                                           
+    48         5         18.5      3.7      0.0          if self.args.objective == "regression":
+    49                                                       loss_func = nn.MSELoss()
+    50                                                       y = y.float()
+    51                                                       y_val = y_val.float()
+    52         5          3.5      0.7      0.0          elif self.args.objective == "classification":
+    53         5        818.0    163.6      0.0              loss_func = nn.CrossEntropyLoss()
+    54                                                   else:
+    55                                                       loss_func = nn.BCEWithLogitsLoss()
+    56                                                       y = y.float()
+    57                                                       y_val = y_val.float()
+    58                                           
+    59         5         80.7     16.1      0.0          train_dataset = TensorDataset(X, y)
+    60        10        812.0     81.2      0.0          train_loader = DataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=False,
+    61         5          1.1      0.2      0.0                                    num_workers=4)
+    62                                           
+    63         5         45.1      9.0      0.0          val_dataset = TensorDataset(X_val, y_val)
+    64         5        202.1     40.4      0.0          val_loader = DataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=False)
+    65                                           
+    66         5         14.0      2.8      0.0          min_val_loss = float("inf")
+    67         5          1.2      0.2      0.0          min_val_loss_idx = 0
+    68                                           
+    69         5          2.0      0.4      0.0          loss_history = []
+    70         5          1.5      0.3      0.0          val_loss_history = []
+    71                                           
+    72       546        329.0      0.6      0.0          for epoch in range(self.args.epochs):
+    73   1983618 3729181561.7   1880.0     27.7              for i, (batch_X, batch_y) in enumerate(train_loader): # costy
+    74                                           
+    75   1983072 2389525908.9   1205.0     17.8                  out = self.model(batch_X.to(self.device)) # costy
+    76                                           
+    77   1983072    4083447.5      2.1      0.0                  if self.args.objective == "regression" or self.args.objective == "binary":
+    78                                                               out = out.squeeze()
+    79                                           
+    80   1983072  504528380.7    254.4      3.8                  loss = loss_func(out, batch_y.to(self.device))
+    81   1983072  275607677.0    139.0      2.1                  loss_history.append(loss.item())
+    82                                           
+    83   1983072  431421818.6    217.6      3.2                  optimizer.zero_grad()
+    84   1983072 2034598087.3   1026.0     15.1                  loss.backward() # costy
+    85   1983072 3267888347.9   1647.9     24.3                  optimizer.step() # costy
+    86                                           
+    87                                                       # Early Stopping
+    88       546    4133062.4   7569.7      0.0              val_loss = 0.0
+    89       546        632.4      1.2      0.0              val_dim = 0
+    90    248430  501770601.2   2019.8      3.7              for val_i, (batch_val_X, batch_val_y) in enumerate(val_loader):
+    91    247884  230377905.6    929.4      1.7                  out = self.model(batch_val_X.to(self.device))
+    92                                           
+    93    247884     394453.0      1.6      0.0                  if self.args.objective == "regression" or self.args.objective == "binary":
+    94                                                               out = out.squeeze()
+    95                                           
+    96    247884   63680067.9    256.9      0.5                  val_loss += loss_func(out, batch_val_y.to(self.device))
+    97    247884     177391.7      0.7      0.0                  val_dim += 1
+    98                                           
+    99       546      20108.0     36.8      0.0              val_loss /= val_dim
+   100       546     119494.5    218.9      0.0              val_loss_history.append(val_loss.item())
+   101                                           
+   102       546      72215.5    132.3      0.0              print("Epoch %d, Val Loss: %.5f" % (epoch, val_loss))
+   103                                           
+   104       546     112662.3    206.3      0.0              if val_loss < min_val_loss:
+   105        89     561720.4   6311.5      0.0                  min_val_loss = val_loss
+   106        89         82.2      0.9      0.0                  min_val_loss_idx = epoch
+   107                                           
+   108                                                           # Save the currently best model
+   109        89     361481.4   4061.6      0.0                  self.save_model(filename_extension="best", directory="tmp")
+   110                                           
+   111       546       1383.6      2.5      0.0              if min_val_loss_idx + self.args.early_stopping_rounds < epoch:
+   112         5         19.0      3.8      0.0                  print("Validation loss has not improved for %d steps!" % self.args.early_stopping_rounds)
+   113         5          3.4      0.7      0.0                  print("Early stopping applies.")
+   114         5          2.1      0.4      0.0                  break
+   115                                           
+   116                                                   # Load best model
+   117         5      14098.5   2819.7      0.0          self.load_model(filename_extension="best", directory="tmp")
+   118         5          2.4      0.5      0.0          return loss_history, val_loss_history
+

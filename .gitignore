@@ -8,7 +8,6 @@ catboost_info/
 logs/
 output/
 dataset/
-timing/
 
 
 *.db

@@ -1,0 +1,134 @@
+Namespace(config='config/adult.yml', model_name='MLP', dataset='Adult', objective='binary', use_gpu=True, gpu_ids=[0, 1], data_parallel=False, optimize_hyperparameters=False, n_trials=5, direction='maximize', num_splits=5, shuffle=True, seed=221, scale=True, target_encode=True, one_hot_encode=False, batch_size=128, val_batch_size=256, early_stopping_rounds=20, epochs=5, logging_period=100, num_features=14, num_classes=1, cat_idx=[1, 3, 5, 6, 7, 8, 9, 13], cat_dims=[9, 16, 7, 15, 6, 5, 2, 42])
+Train model with given hyperparameters
+Loading dataset Adult...
+Dataset loaded!
+(32561, 14)
+Scaling the data...
+On Device: cuda
+On Device: cuda
+Epoch 0, Val Loss: 0.40155
+Epoch 1, Val Loss: 0.38709
+Epoch 2, Val Loss: 0.38142
+Epoch 3, Val Loss: 0.35201
+Epoch 4, Val Loss: 0.34977
+{'Log Loss - mean': 0.3494672244650543, 'Log Loss - std': 0.0, 'AUC - mean': 0.8883845790508249, 'AUC - std': 0.0, 'Accuracy - mean': 0.8340242591739597, 'Accuracy - std': 0.0, 'F1 score - mean': 0.8340242591739598, 'F1 score - std': 0.0}
+On Device: cuda
+Epoch 0, Val Loss: 0.39346
+Epoch 1, Val Loss: 0.36470
+Epoch 2, Val Loss: 0.36950
+Epoch 3, Val Loss: 0.33046
+Epoch 4, Val Loss: 0.33375
+{'Log Loss - mean': 0.33973071544354844, 'Log Loss - std': 0.009736509021505857, 'AUC - mean': 0.8940161586968673, 'AUC - std': 0.005631579646042496, 'Accuracy - mean': 0.8394629895378398, 'Accuracy - std': 0.0054387303638800955, 'F1 score - mean': 0.8394629895378398, 'F1 score - std': 0.00543873036388004}
+On Device: cuda
+Epoch 0, Val Loss: 0.40342
+Epoch 1, Val Loss: 0.37676
+Epoch 2, Val Loss: 0.37728
+Epoch 3, Val Loss: 0.35265
+Epoch 4, Val Loss: 0.35219
+{'Log Loss - mean': 0.34408416041671663, 'Log Loss - std': 0.010055083534513782, 'AUC - mean': 0.8944407305117129, 'AUC - std': 0.0046372026760108966, 'Accuracy - mean': 0.8385629594461929, 'Accuracy - std': 0.00461952021091663, 'F1 score - mean': 0.8385629594461929, 'F1 score - std': 0.0046195202109165934}
+On Device: cuda
+Epoch 0, Val Loss: 0.39992
+Epoch 1, Val Loss: 0.38411
+Epoch 2, Val Loss: 0.35635
+Epoch 3, Val Loss: 0.36030
+Epoch 4, Val Loss: 0.34809
+{'Log Loss - mean': 0.34499982421412323, 'Log Loss - std': 0.008851206089238955, 'AUC - mean': 0.894166831350448, 'AUC - std': 0.004043859387444965, 'Accuracy - mean': 0.8398405242529493, 'Accuracy - std': 0.0045718148191596876, 'F1 score - mean': 0.8398405242529494, 'F1 score - std': 0.004571814819159676}
+On Device: cuda
+Epoch 0, Val Loss: 0.42117
+Epoch 1, Val Loss: 0.38669
+Epoch 2, Val Loss: 0.36726
+Epoch 3, Val Loss: 0.35636
+Epoch 4, Val Loss: 0.34985
+{'Log Loss - mean': 0.34610785269730815, 'Log Loss - std': 0.00822106975189612, 'AUC - mean': 0.8923862006163205, 'AUC - std': 0.005075906051299743, 'Accuracy - mean': 0.839439986969927, 'Accuracy - std': 0.004166882894072509, 'F1 score - mean': 0.839439986969927, 'F1 score - std': 0.004166882894072503}
+{'Log Loss - mean': 0.34610785269730815, 'Log Loss - std': 0.00822106975189612, 'AUC - mean': 0.8923862006163205, 'AUC - std': 0.005075906051299743, 'Accuracy - mean': 0.839439986969927, 'Accuracy - std': 0.004166882894072509, 'F1 score - mean': 0.839439986969927, 'F1 score - std': 0.004166882894072503}
+(7.573238280000001, 0.09941485999999991)
+Wrote profile results to train_timing.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 41.263 s
+File: /opt/notebooks/models/basemodel_torch.py
+Function: fit at line 38
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    38                                               @profile
+    39                                               def fit(self, X, y, X_val=None, y_val=None):
+    40         5       1256.2    251.2      0.0          optimizer = optim.AdamW(self.model.parameters(), lr=self.params["learning_rate"])
+    41
+    42         5       3833.4    766.7      0.0          X = torch.tensor(X).float()
+    43         5        297.7     59.5      0.0          X_val = torch.tensor(X_val).float()
+    44
+    45         5        295.8     59.2      0.0          y = torch.tensor(y)
+    46         5        119.9     24.0      0.0          y_val = torch.tensor(y_val)
+    47
+    48         5         11.6      2.3      0.0          if self.args.objective == "regression":
+    49                                                       loss_func = nn.MSELoss()
+    50                                                       y = y.float()
+    51                                                       y_val = y_val.float()
+    52         5          2.6      0.5      0.0          elif self.args.objective == "classification":
+    53                                                       loss_func = nn.CrossEntropyLoss()
+    54                                                   else:
+    55         5        779.6    155.9      0.0              loss_func = nn.BCEWithLogitsLoss()
+    56         5       1004.5    200.9      0.0              y = y.float()
+    57         5        101.6     20.3      0.0              y_val = y_val.float()
+    58
+    59         5         94.9     19.0      0.0          train_dataset = TensorDataset(X, y)
+    60        10        963.0     96.3      0.0          train_loader = DataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=True,
+    61         5          0.9      0.2      0.0                                    num_workers=4)
+    62
+    63         5         37.4      7.5      0.0          val_dataset = TensorDataset(X_val, y_val)
+    64         5        285.4     57.1      0.0          val_loader = DataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=True)
+    65
+    66         5         13.9      2.8      0.0          min_val_loss = float("inf")
+    67         5          1.1      0.2      0.0          min_val_loss_idx = 0
+    68
+    69         5          1.7      0.3      0.0          loss_history = []
+    70         5          1.2      0.2      0.0          val_loss_history = []
+    71
+    72        30         40.0      1.3      0.0          for epoch in range(self.args.epochs):
+    73      5125   11929784.2   2327.8     28.9              for i, (batch_X, batch_y) in enumerate(train_loader):
+    74
+    75      5100    7300917.3   1431.6     17.7                  out = self.model(batch_X.to(self.device))
+    76
+    77      5100      11755.6      2.3      0.0                  if self.args.objective == "regression" or self.args.objective == "binary":
+    78      5100      47685.4      9.4      0.1                      out = out.squeeze()
+    79
+    80      5100    2144896.1    420.6      5.2                  loss = loss_func(out, batch_y.to(self.device))
+    81      5100     919772.7    180.3      2.2                  loss_history.append(loss.item())
+    82
+    83      5100    1225881.7    240.4      3.0                  optimizer.zero_grad()
+    84      5100    5384975.8   1055.9     13.1                  loss.backward()
+    85      5100    9785547.8   1918.7     23.7                  optimizer.step()
+    86
+    87                                                       # Early Stopping
+    88        25       1462.9     58.5      0.0              val_loss = 0.0
+    89        25          6.8      0.3      0.0              val_dim = 0
+    90       675    1398851.0   2072.4      3.4              for val_i, (batch_val_X, batch_val_y) in enumerate(val_loader):
+    91       650     713148.8   1097.2      1.7                  out = self.model(batch_val_X.to(self.device))
+    92
+    93       650       1171.8      1.8      0.0                  if self.args.objective == "regression" or self.args.objective == "binary":
+    94       650       5484.5      8.4      0.0                      out = out.squeeze()
+    95
+    96       650     268106.0    412.5      0.6                  val_loss += loss_func(out, batch_val_y.to(self.device))
+    97       650        521.5      0.8      0.0                  val_dim += 1
+    98
+    99        25       1166.7     46.7      0.0              val_loss /= val_dim
+   100        25       4753.7    190.1      0.0              val_loss_history.append(val_loss.item())
+   101
+   102        25       4524.6    181.0      0.0              print("Epoch %d, Val Loss: %.5f" % (epoch, val_loss))
+   103
+   104        25      15041.4    601.7      0.0              if val_loss < min_val_loss:
+   105        21       7693.1    366.3      0.0                  min_val_loss = val_loss
+   106        21          9.7      0.5      0.0                  min_val_loss_idx = epoch
+   107
+   108                                                           # Save the currently best model
+   109        21      59651.4   2840.5      0.1                  self.save_model(filename_extension="best", directory="tmp")
+   110
+   111        25         98.9      4.0      0.0              if min_val_loss_idx + self.args.early_stopping_rounds < epoch:
+   112                                                           print("Validation loss has not improved for %d steps!" % self.args.early_stopping_rounds)
+   113                                                           print("Early stopping applies.")
+   114                                                           break
+   115
+   116                                                   # Load best model
+   117         5      20903.7   4180.7      0.1          self.load_model(filename_extension="best", directory="tmp")
+   118         5          2.6      0.5      0.0          return loss_history, val_loss_history
