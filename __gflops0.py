@@ -6,7 +6,7 @@ import argparse
 from utils import timer
 
 class LinearModel(nn.Module):
-    def __init__(self, input_size=100, hidden_dim=100):
+    def __init__(self, input_size, hidden_dim):
         super(LinearModel, self).__init__()
         self.linear1 = nn.Linear(input_size, hidden_dim)
         self.linear2 = nn.Linear(hidden_dim, 1)
@@ -22,17 +22,18 @@ class LinearModel(nn.Module):
 def run(args):
     input_size = 54
     hidden_dim = 100
-    num_samples = 100000
+    num_samples = 50000
+    num_epochs = 100
 
-    x, y = sklearn.datasets.fetch_covtype(return_X_y=True)
-    x = x[:num_samples]
-    y = y[:num_samples]
-    x = torch.from_numpy(x).float()  # Specify float data type
-    y = torch.from_numpy(y).long()  # Specify long data type
-    #x = torch.randn(num_samples, input_size)
-    #w = torch.randn(input_size, 1)
-    #y = torch.sin(torch.matmul(x, w)) + torch.randn(num_samples, 1)
-    
+    num_connections  = hidden_dim*(input_size+hidden_dim)
+    GFLO = num_epochs*6*num_samples*num_connections / 1e9
+    print(f"GFLO is {GFLO:.2f}")
+    print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOP machine")
+
+    # Create dummy data
+    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.1)
+    x = torch.tensor(x, dtype=torch.float32)
+    y = torch.tensor(y, dtype=torch.float32)
     # Create an instance of the LinearModel
     model = LinearModel(input_size, hidden_dim)
 
@@ -43,16 +44,12 @@ def run(args):
     model = model.to(device)
     print(f'device: {device}')
 
-    # Define loss function and optimizer
-    #criterion = nn.MSELoss()
-    #optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-
+    criterion = nn.MSELoss()
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+    
     total_timer = timer.Timer()
     epoch_timer = timer.Timer()
     # Train the model
-    num_epochs = 1000
     total_timer.start()
     for epoch in range(num_epochs):
         epoch_timer.start()
