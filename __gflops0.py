@@ -23,7 +23,7 @@ def run(args):
     input_size = 54
     hidden_dim = 100
     num_samples = 50000
-    num_epochs = 100
+    num_epochs = 200
 
     num_connections  = hidden_dim*(input_size+hidden_dim)
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
