@@ -75,7 +75,7 @@ def run(args):
         optimizer.step()
 
         # Print progress
-        if (epoch+1) % 1 == 0:
+        if (epoch+1) % 20 == 0:
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
