@@ -21,6 +21,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
+@profile
 if __name__ == "__main__":
     # Create an instance of the neural network
 
