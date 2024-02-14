@@ -351,7 +351,7 @@ parameters: {
         MLP: {
             hidden_dim: 99,
             n_layers: 3,
-            learning_rate: 7.0e-4
+            learning_rate: 0.1
         },
         MLPNUM: {
             hidden_dim: 99,
