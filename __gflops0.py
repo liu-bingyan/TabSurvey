@@ -43,7 +43,7 @@ class MLP(nn.Module):
 def run(args):
     input_size = 54
     hidden_dim = 68
-    num_samples = 1000000
+    num_samples = 10000
     num_epochs = 300
 
     # Create an instance of the LinearModel
