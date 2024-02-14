@@ -49,7 +49,7 @@ def run(args):
     # Create an instance of the LinearModel
    # model = LinearModel(input_size, hidden_dim)
     
-    model = MLP(input_size, hidden_dim, num_hidden_layers=3)
+    model = LinearModel(input_size, hidden_dim, num_hidden_layers=3)
 
     num_connections  = model.connections
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
@@ -57,7 +57,7 @@ def run(args):
     print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
 
     # Create dummy data
-    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.001)
+    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.00001)
     x = torch.tensor(x, dtype=torch.float32)
     y = y.reshape(-1, 1)
     y = torch.tensor(y, dtype=torch.float32)
