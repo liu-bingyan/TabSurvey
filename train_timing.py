@@ -14,7 +14,6 @@ import csv
 
 from sklearn.model_selection import KFold, StratifiedKFold  # , train_test_split
 
-
 def cross_validation(model, X, y, args, save_model=False):
     # Record some statistics and metrics
     sc = get_scorer(args)
@@ -126,7 +125,7 @@ def main(args):
 def main_once(args):
     print("Train model with given hyperparameters")
     X, y = load_data(args)
-    
+ 
     model_name = str2model(args.model_name)
 
     parameters = args.parameters[args.dataset][args.model_name]

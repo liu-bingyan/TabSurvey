@@ -7,8 +7,9 @@ __pycache/
 catboost_info/
 logs/
 output/
-docker/
-data/
+dataset/
+timing/
+
 
 *.db
 *.zip
@@ -16,5 +17,6 @@ data/
 *.info
 *.ps1
 
-REMARK.md
-TODO.md
+__MEMO.md
+__TODO.md
+
