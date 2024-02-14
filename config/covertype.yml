@@ -23,9 +23,9 @@ scale: True
 target_encode: True
 
 # Training parameters
-batch_size: 128
-val_batch_size: 256
-early_stopping_rounds: 20
+batch_size: 66536
+val_batch_size: 66536
+early_stopping_rounds: 400
 epochs: 1000
 logging_period: 100
 
