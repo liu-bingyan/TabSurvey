@@ -39,7 +39,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-
+@profile
 def run(args):
     input_size = 54
     hidden_dim = 68
