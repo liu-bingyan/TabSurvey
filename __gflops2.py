@@ -81,7 +81,7 @@ def run(args):
         epoch_timer.start()
         
         for i, (batch_x, batch_y) in enumerate(dataloader):
-            print('training on batch i:', i)
+            #print('training on batch i:', i)
             # Forward pass
             outputs = model(batch_x)
             loss = criterion(outputs, batch_y)
