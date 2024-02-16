@@ -5,6 +5,7 @@ from sklearn import datasets
 import argparse
 import torch.nn.functional as F
 from utils import timer
+from torch.utils.data import DataLoader, TensorDataset
 
 class MLP(nn.Module):
     def __init__(self, in_features=100,hidden_dim=68,out_features=7, num_hidden_layers=3):
@@ -65,16 +66,26 @@ def run(args):
     epoch_timer = timer.Timer()
     # Train the model
     total_timer.start()
+    
+    # Create a TensorDataset
+    dataset = TensorDataset(x, y)
+
+    # Create a DataLoader with batch size
+    batch_size = 64
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+
     for epoch in range(num_epochs):
         epoch_timer.start()
-        # Forward pass
-        outputs = model(x)
-        loss = criterion(outputs, y)
+        
+        for batch_x, batch_y in dataloader:
+            # Forward pass
+            outputs = model(batch_x)
+            loss = criterion(outputs, batch_y)
 
-        # Backward and optimize
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+            # Backward and optimize
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
         # Print progress
         if (epoch+1) % 20 == 0:
@@ -83,7 +94,7 @@ def run(args):
         epoch_timer.end()
 
     total_timer.end()
-    
+
     # Test the model
     model.eval()
     with torch.no_grad():
@@ -94,7 +105,7 @@ def run(args):
     print(f'total_timer : {total_timer.get_average_time()}')
     print(f'epoch_timer : {epoch_timer.get_average_time()}')
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Example script with named arguments")
-    args = parser.parse_args()
+    if __name__ == "__main__":
+        parser = argparse.ArgumentParser(description="Example script with named arguments")
+        args = parser.parse_args()
     run(args)
