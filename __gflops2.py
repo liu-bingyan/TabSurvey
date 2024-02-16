@@ -1,3 +1,4 @@
+import math
 import torch
 import torch.nn as nn
 import sklearn
@@ -52,10 +53,14 @@ def run(args):
     y = F.one_hot(y, num_classes=7).to(torch.float32)
     # Move the data and model to GPU if available
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(type(x))
+    print('x is on device:', x.device)
     x = x.to(device)
-    print(type(x))
+    print('x is on device:', x.device)
+
+    print('y is on device:', y.device)
     y = y.to(device)
+    print('y is on device:', y.device)
+
     model = model.to(device)
     print(f'device: {device}')
 
@@ -83,7 +88,10 @@ def run(args):
         epoch_timer.start()
         
         for i, (batch_x, batch_y) in enumerate(dataloader):
+            if (i+1)% (math.floor(input_size/batch_size * 0.01)) == 0:
+                print('batch is on device:', batch_x.device)
             #print('training on batch i:', i)
+            
             # Forward pass
             outputs = model(batch_x)
             loss = criterion(outputs, batch_y)
