@@ -42,7 +42,7 @@ def run(args):
     num_connections  = model.connections
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
     print(f"GFLO is {GFLO:.2f}")
-    print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
+    print(f"Should take {GFLO/(5000 * 0.3):.2f} seconds on a 5 TFLOPS machine")
 
     # Create dummy data
     x, y = datasets.fetch_covtype(return_X_y=True)
@@ -75,7 +75,7 @@ def run(args):
     # Create a DataLoader with batch size
     batch_size = args.batch_size
     print('batch_size:', batch_size)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle)#, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
 
     print('start training the model')
     for epoch in range(num_epochs):
