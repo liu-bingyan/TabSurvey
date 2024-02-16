@@ -66,17 +66,21 @@ def run(args):
     # Train the model
     total_timer.start()
     
+    print('construct dataset')
     # Create a TensorDataset
     dataset = TensorDataset(x, y)
 
+    print('construct dataloader')
     # Create a DataLoader with batch size
-    batch_size = 64
+    batch_size = 66536
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
+    print('start training the model')
     for epoch in range(num_epochs):
         epoch_timer.start()
         
-        for batch_x, batch_y in dataloader:
+        for i, (batch_x, batch_y) in enumerate(dataloader):
+            print('training on batch i:', i)
             # Forward pass
             outputs = model(batch_x)
             loss = criterion(outputs, batch_y)
@@ -87,7 +91,7 @@ def run(args):
             optimizer.step()
 
         # Print progress
-        if (epoch+1) % 20 == 0:
+        if (epoch+1) % 1 == 0:
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
