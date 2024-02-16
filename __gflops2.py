@@ -75,7 +75,7 @@ def run(args):
     # Create a DataLoader with batch size
     batch_size = args.batch_size
     print('batch_size:', batch_size)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
 
     print('start training the model')
     for epoch in range(num_epochs):
@@ -114,5 +114,9 @@ def run(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Example script with named arguments")
     parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
+    parser.add_argument("--shuffle", type=bool, default=True, help="Shuffle the dataset")
+    parser.add_argument("--num_workers", type=int, default=4, help="Number of workers for dataloader")  
+    parser.add_argument("--pin_memory", type=bool, default=True, help="Pin memory for faster transfer to GPU")
+    parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete")
     args = parser.parse_args()
     run(args)
