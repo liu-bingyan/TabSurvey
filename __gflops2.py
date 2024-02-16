@@ -53,16 +53,16 @@ def run(args):
     y = F.one_hot(y, num_classes=7).to(torch.float32)
     # Move the data and model to GPU if available
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print('x is on device:', x.device)
+    #print('x is on device:', x.device)
     x = x.to(device)
-    print('x is on device:', x.device)
+    #print('x is on device:', x.device)
 
-    print('y is on device:', y.device)
+    #print('y is on device:', y.device)
     y = y.to(device)
-    print('y is on device:', y.device)
+    #print('y is on device:', y.device)
 
     model = model.to(device)
-    print(f'device: {device}')
+    print(f'model is on cuda: Don`t know, x is on device: {x.device}, y is on device: {y.device}')
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -81,6 +81,7 @@ def run(args):
     batch_size = args.batch_size
     print('batch_size:', batch_size)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle)#, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
+    print('dataloader is on device : don`t know')
 
     torch.cuda.synchronize()
     print('start training the model')
@@ -88,10 +89,7 @@ def run(args):
         epoch_timer.start()
         
         for i, (batch_x, batch_y) in enumerate(dataloader):
-            if (i+1)% (math.floor(num_samples/batch_size * 0.01)) == 0:
-                print('batch is on device:', batch_x.device)
-            #print('training on batch i:', i)
-            
+          
             # Forward pass
             outputs = model(batch_x)
             loss = criterion(outputs, batch_y)
@@ -123,8 +121,8 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Example script with named arguments")
-    parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
-    parser.add_argument("--shuffle", type=bool, default=True, help="Shuffle the dataset")
+    parser.add_argument("--batch_size", type=int, default=16384, help="Batch size for training")
+    parser.add_argument("--shuffle", type=bool, default=False, help="Shuffle the dataset")
     parser.add_argument("--num_workers", type=int, default=4, help="Number of workers for dataloader")  
     parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU")
     parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete")
