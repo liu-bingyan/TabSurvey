@@ -26,7 +26,6 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-@profile
 def run(args):
     input_size = 54
     hidden_dim = 99
@@ -105,7 +104,7 @@ def run(args):
     print(f'total_timer : {total_timer.get_average_time()}')
     print(f'epoch_timer : {epoch_timer.get_average_time()}')
 
-    if __name__ == "__main__":
-        parser = argparse.ArgumentParser(description="Example script with named arguments")
-        args = parser.parse_args()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Example script with named arguments")
+    args = parser.parse_args()
     run(args)
