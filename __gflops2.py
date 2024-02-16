@@ -88,7 +88,7 @@ def run(args):
         epoch_timer.start()
         
         for i, (batch_x, batch_y) in enumerate(dataloader):
-            if (i+1)% (math.floor(input_size/batch_size * 0.01)) == 0:
+            if (i+1)% (math.floor(num_samples/batch_size * 0.01)) == 0:
                 print('batch is on device:', batch_x.device)
             #print('training on batch i:', i)
             
