@@ -97,6 +97,7 @@ def run(args):
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
+        print('avg time for epoch:', epoch_timer.get_average_time())
 
     total_timer.end()
 
@@ -116,7 +117,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
     parser.add_argument("--shuffle", type=bool, default=True, help="Shuffle the dataset")
     parser.add_argument("--num_workers", type=int, default=4, help="Number of workers for dataloader")  
-    parser.add_argument("--pin_memory", type=bool, default=True, help="Pin memory for faster transfer to GPU")
+    parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU")
     parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete")
     args = parser.parse_args()
     run(args)
