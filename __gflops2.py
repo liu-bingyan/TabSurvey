@@ -26,6 +26,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
+@profile
 def run(args):
     input_size = 54
     hidden_dim = 99
@@ -72,7 +73,7 @@ def run(args):
 
     print('construct dataloader')
     # Create a DataLoader with batch size
-    batch_size = 66536
+    batch_size = args.batch_size
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     print('start training the model')
@@ -108,7 +109,11 @@ def run(args):
     print(f'total_timer : {total_timer.get_average_time()}')
     print(f'epoch_timer : {epoch_timer.get_average_time()}')
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Example script with named arguments")
+    parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
+    parser.add_argument("--num_epochs", type=int, default=300, help="Number of epochs for training")
+    parser.add_argument("--learning_rate", type=float, default=7.0e-4, help="Learning rate for training")
     args = parser.parse_args()
     run(args)
