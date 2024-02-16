@@ -113,7 +113,5 @@ def run(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Example script with named arguments")
     parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
-    parser.add_argument("--num_epochs", type=int, default=300, help="Number of epochs for training")
-    parser.add_argument("--learning_rate", type=float, default=7.0e-4, help="Learning rate for training")
     args = parser.parse_args()
     run(args)
