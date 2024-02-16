@@ -77,6 +77,7 @@ def run(args):
     print('batch_size:', batch_size)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle)#, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
 
+    torch.cuda.synchronize()
     print('start training the model')
     for epoch in range(num_epochs):
         epoch_timer.start()
@@ -98,7 +99,7 @@ def run(args):
 
         epoch_timer.end()
         print('avg time for epoch:', epoch_timer.get_average_time())
-
+    torch.cuda.synchronize()
     total_timer.end()
 
     # Test the model
