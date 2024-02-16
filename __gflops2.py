@@ -74,6 +74,7 @@ def run(args):
     print('construct dataloader')
     # Create a DataLoader with batch size
     batch_size = args.batch_size
+    print('batch_size:', batch_size)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     print('start training the model')
