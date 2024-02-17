@@ -32,7 +32,7 @@ def run(args):
     print(args)
     input_size = 54
     hidden_dim = 99
-    num_samples = 581012
+    num_samples = args.num_samples
     num_epochs = 300
     learning_rate = math.sqrt(args.batch_size/num_samples)*0.1
 
@@ -145,9 +145,15 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=16384, help="Batch size for training")
     parser.add_argument("--shuffle", type=bool, default=False, help="Shuffle the dataset",action=argparse.BooleanOptionalAction)
     parser.add_argument("--num_workers", type=int, default=4, help="Number of workers for dataloader")  
+<<<<<<< HEAD
+    parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU")
+    parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete")
+    parser.add_argument("--num_samples", type=int, default=581012, help="Number of samples in the dataset")
+=======
     parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU", action=argparse.BooleanOptionalAction)
     parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete", action=argparse.BooleanOptionalAction)
     parser.add_argument("--data_loader", type=bool, default=False, help="Use dataloader or not", action=argparse.BooleanOptionalAction)
     parser.add_argument("--batching", type=bool, default=False, help="Use dataloader or not", action=argparse.BooleanOptionalAction)
+>>>>>>> f0a53c79658494f4871210b6a1684a0b0d26833b
     args = parser.parse_args()
     run(args)
