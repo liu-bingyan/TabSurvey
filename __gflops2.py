@@ -62,9 +62,6 @@ def run(args):
     x = x.to(device)
     y = y.to(device)
 
-
-
-    
     model = model.to(device)
     criterion = criterion.to(device)
     #optimizer = optimizer.to(device)
