@@ -9,7 +9,7 @@ from utils import timer
 from torch.utils.data import DataLoader, TensorDataset
 
 class MLP(nn.Module):
-    def __init__(self, in_features=100,hidden_dim=68,out_features=7, num_hidden_layers=3):
+    def __init__(self, in_features,hidden_dim,out_features, num_hidden_layers):
         super(MLP, self).__init__()
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(in_features, hidden_dim))
@@ -27,130 +27,97 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-@profile
 def run(args):
-    print(args)
-    input_size = 54
-    hidden_dim = 99
-    num_samples = args.num_samples
-    num_epochs = 300
-    learning_rate = math.sqrt(args.batch_size/num_samples)*0.1
+    num_epochs = args.num_epochs
+    batch_size = args.batch_size    
 
-    # Create an instance of the LinearModel
-    # model = LinearModel(input_size, hidden_dim)
+    print(args)
+    x, y = datasets.fetch_covtype(return_X_y=True)
+    num_samples = args.sample_portion * x.shape[0]
+    learning_rate = math.sqrt(batch_size/num_samples)*0.01
     
-    model = MLP(input_size, hidden_dim)
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    model = MLP(in_features=x.shape[1], hidden_dim=99, out_features=7, num_hidden_layers=3)
+    print(f'model in_features: {x.shape[1]}, hidden_dim: 99, out_features: 7, num_hidden_layers: 3, num_samples: {num_samples},leanring_rate: {learning_rate}')
     
+    #GFLO
     num_connections  = model.connections
     GFLO = num_epochs*6*num_samples*num_connections / 1e9
-    print(f"GFLO is {GFLO:.2f}")
-    print(f"Should take {GFLO/(5000 * 0.3):.2f} seconds on a 5 TFLOPS machine")
+    print(f"GFLO is {GFLO:.2f}, should take {GFLO/(5000 * 0.3):.2f} seconds on a 5 TFLOPS machine")
 
-    # Create dummy data
-    x, y = datasets.fetch_covtype(return_X_y=True)
+    # load data 
     x = torch.tensor(x, dtype=torch.float32)
-    y = y-1
     y = torch.tensor(y, dtype=torch.long)
-    y = F.one_hot(y, num_classes=7).to(torch.float32)
-
-    # Move the data and model to GPU if available
-    print('cuda is available:', torch.cuda.is_available())
+    y = F.one_hot(y-1, num_classes=7).to(torch.float32)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
- 
+
+    # move data and model to GPU
     x = x.to(device)
     y = y.to(device)
-
     model = model.to(device)
-    criterion = criterion.to(device)
-    #optimizer = optimizer.to(device)
     
-    total_timer = timer.Timer()
-    epoch_timer = timer.Timer()
 
-    # Train the model
-    total_timer.start()
+
+
     
-    # Create a TensorDataset
+    criterion = nn.CrossEntropyLoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
     dataset = TensorDataset(x, y)
+    dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
 
-    # Create a DataLoader with batch size
-    batch_size = args.batch_size
-    print('batch_size:', batch_size)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=args.shuffle)#, num_workers=args.num_workers, pin_memory=args.pin_memory, drop_last=args.drop_last)
-
-
-    #torch.cuda.synchronize()
     print('start training the model')
+    epoch_timer = timer.Timer()
+    test_timer = timer.Timer()
+
+    loss = criterion(y*0,y)
+    print(f'Initial Loss: {loss.item():.10f}')
     for epoch in range(num_epochs):
         epoch_timer.start()
-        
-        if args.data_loader:
+        if args.data_loader==2:
             for i, (batch_x, batch_y) in enumerate(dataloader):
-            
-                # Forward pass
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
-
-                # Backward and optimize
                 optimizer.zero_grad()
                 loss.backward()
-                optimizer.step()
-        elif args.batching:
+                optimizer.step()              
+        elif args.data_loader==1:
             for i in range(0, num_samples, batch_size):
                 batch_x = x[i:i+batch_size]
                 batch_y = y[i:i+batch_size]
-                # Forward pass
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
-
-                # Backward and optimize
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-
-            outputs = model(x)
-            loss = criterion(outputs, y)
-
-            # Backward and optimize
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-
+        else:
+                outputs = model(x)
+                loss = criterion(outputs, y)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+        if (epoch<10)| ((epoch+1) % 10 == 0) :
+            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
         epoch_timer.end()        
-        # Print progress
-        if (epoch<10)| (epoch % 10 == 0):
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
-            print('avg time for epoch:', epoch_timer.get_average_time())
+    print('finished training the model')
 
-    #torch.cuda.synchronize()
-    total_timer.end()
-
-    # Test the model
+    test_timer.start()
     model.eval()
     with torch.no_grad():
         test_outputs = model(x)
         test_loss = criterion(test_outputs, y)
-        print(f'Test Loss: {test_loss.item():.4f}')
-
-    print(f'total_timer : {total_timer.get_average_time()}')
+        print(f'Test Loss: {test_loss.item():.10f}')
+    test_timer.end()
+    print(f'epoch : {epoch_timer.get_average_time()}, total : {epoch_timer.get_total_time()}, test : {test_timer.get_average_time()}')    
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Example script with named arguments")
+    parser.add_argument("--num_epochs", type=int, default=300, help="Number of epochs")
+    parser.add_argument("--sample_portion", type=int, default=1, help="Number of samples in the dataset")
+
+    parser.add_argument("--data_loader", type=int, default=False, help="Use dataloader or not")
     parser.add_argument("--batch_size", type=int, default=16384, help="Batch size for training")
     parser.add_argument("--shuffle", type=bool, default=False, help="Shuffle the dataset",action=argparse.BooleanOptionalAction)
-    parser.add_argument("--num_workers", type=int, default=4, help="Number of workers for dataloader")  
-<<<<<<< HEAD
-    parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU")
-    parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete")
-    parser.add_argument("--num_samples", type=int, default=581012, help="Number of samples in the dataset")
-=======
-    parser.add_argument("--pin_memory", type=bool, default=False, help="Pin memory for faster transfer to GPU", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--drop_last", type=bool, default=False, help="Drop the last batch if it is not complete", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--data_loader", type=bool, default=False, help="Use dataloader or not", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--batching", type=bool, default=False, help="Use dataloader or not", action=argparse.BooleanOptionalAction)
->>>>>>> f0a53c79658494f4871210b6a1684a0b0d26833b
+
     args = parser.parse_args()
     run(args)

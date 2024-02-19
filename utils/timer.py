@@ -17,3 +17,6 @@ class Timer:
 
     def get_average_time(self):
         return np.mean(self.save_times)
+    
+    def get_total_time(self):
+        return np.sum(self.save_times)

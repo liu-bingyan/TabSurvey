@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from utils import timer
 
 class MLP(nn.Module):
-    def __init__(self, in_features=100,hidden_dim=68,out_features=7, num_hidden_layers=3):
+    def __init__(self, in_features=54,hidden_dim=99,out_features=7, num_hidden_layers=3):
         super(MLP, self).__init__()
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(in_features, hidden_dim))
@@ -25,7 +25,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-@profile
+#@profile
 def run(args):
     input_size = 54
     hidden_dim = 99

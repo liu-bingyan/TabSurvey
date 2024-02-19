@@ -39,7 +39,6 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-@profile
 def run(args):
     input_size = 54
     hidden_dim = 99
@@ -73,7 +72,7 @@ def run(args):
 
     criterion = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
-    
+    print(f'initial loss : {criterion(model(x),y)}')
     total_timer = timer.Timer()
     epoch_timer = timer.Timer()
     # Train the model
@@ -90,7 +89,7 @@ def run(args):
         optimizer.step()
 
         # Print progress
-        if (epoch+1) % 1 == 0:
+        if (epoch+1) % 10 == 0:
            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
         epoch_timer.end()
