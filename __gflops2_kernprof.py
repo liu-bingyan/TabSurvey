@@ -7,7 +7,6 @@ import argparse
 import torch.nn.functional as F
 from utils import timer
 from torch.utils.data import DataLoader, TensorDataset
-from fast_tensor_data_loader import FastTensorDataLoader
 
 class MLP(nn.Module):
     def __init__(self, in_features,hidden_dim,out_features, num_hidden_layers):
@@ -27,6 +26,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
+@profile
 def run(args):
     num_epochs = args.num_epochs
     batch_size = args.batch_size    
@@ -64,8 +64,7 @@ def run(args):
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     dataset = TensorDataset(x, y)
-    dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
-    dataloader3 = FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
+    dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle, num_workers=6)
 
     print('start training the model')
     epoch_timer = timer.Timer()
@@ -75,14 +74,7 @@ def run(args):
     print(f'Initial Loss: {loss.item():.10f}')
     for epoch in range(num_epochs):
         epoch_timer.start()
-        if args.data_loader==3:
-            for i, (batch_x, batch_y) in enumerate(dataloader3):
-                outputs = model(batch_x)
-                loss = criterion(outputs, batch_y)
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step() 
-        elif args.data_loader==2:
+        if args.data_loader==2:
             for i, (batch_x, batch_y) in enumerate(dataloader):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
@@ -104,8 +96,8 @@ def run(args):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-        if (epoch<10)| ((epoch+1) % 10 == 0) :
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
+        #if (epoch<10)| ((epoch+1) % 10 == 0) :
+            #print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
         epoch_timer.end()        
     print('finished training the model')
 
