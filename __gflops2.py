@@ -18,7 +18,6 @@ class MLP(nn.Module):
             self.layers.append(nn.Linear(hidden_dim, hidden_dim))
             self.layers.append(nn.ReLU())
         self.layers.append(nn.Linear(hidden_dim, out_features))
-        self.layers.append(nn.Softmax(dim=1))
 
         self.connections = (num_hidden_layers-1)* hidden_dim**2 + hidden_dim*(in_features+out_features)
 
@@ -27,6 +26,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
+@profile
 def run(args):
     num_epochs = args.num_epochs
     batch_size = args.batch_size    
@@ -34,7 +34,12 @@ def run(args):
     print(args)
     x, y = datasets.fetch_covtype(return_X_y=True)
     num_samples = args.sample_portion * x.shape[0]
-    learning_rate = math.sqrt(batch_size/num_samples)*0.01
+
+    learning_rate = None
+    if args.learning_rate is None:
+        learning_rate = math.sqrt(batch_size/num_samples)*0.01
+    else:
+        learning_rate = args.learning_rate
     
     model = MLP(in_features=x.shape[1], hidden_dim=99, out_features=7, num_hidden_layers=3)
     print(f'model in_features: {x.shape[1]}, hidden_dim: 99, out_features: 7, num_hidden_layers: 3, num_samples: {num_samples},leanring_rate: {learning_rate}')
@@ -54,11 +59,7 @@ def run(args):
     x = x.to(device)
     y = y.to(device)
     model = model.to(device)
-    
 
-
-
-    
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -95,8 +96,8 @@ def run(args):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-        if (epoch<10)| ((epoch+1) % 10 == 0) :
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
+        #if (epoch<10)| ((epoch+1) % 10 == 0) :
+            #print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
         epoch_timer.end()        
     print('finished training the model')
 
@@ -115,8 +116,9 @@ if __name__ == "__main__":
     parser.add_argument("--num_epochs", type=int, default=300, help="Number of epochs")
     parser.add_argument("--sample_portion", type=int, default=1, help="Number of samples in the dataset")
 
-    parser.add_argument("--data_loader", type=int, default=False, help="Use dataloader or not")
+    parser.add_argument("--data_loader", type=int, default=0, help="Use dataloader or not")
     parser.add_argument("--batch_size", type=int, default=16384, help="Batch size for training")
+    parser.add_argument("--learning_rate", type=float, default=1.67e-3, help="Use dataloader or not")
     parser.add_argument("--shuffle", type=bool, default=False, help="Shuffle the dataset",action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()

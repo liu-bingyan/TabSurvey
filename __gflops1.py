@@ -16,7 +16,6 @@ class MLP(nn.Module):
             self.layers.append(nn.Linear(hidden_dim, hidden_dim))
             self.layers.append(nn.ReLU())
         self.layers.append(nn.Linear(hidden_dim, out_features))
-        self.layers.append(nn.Softmax(dim=1))
 
         self.connections = (num_hidden_layers-1)* hidden_dim**2 + hidden_dim*(in_features+out_features)
 
@@ -30,7 +29,7 @@ def run(args):
     input_size = 54
     hidden_dim = 99
     num_samples = 581012
-    num_epochs = 300
+    num_epochs = 600
     learning_rate = 7.0e-4
 
     # Create an instance of the LinearModel

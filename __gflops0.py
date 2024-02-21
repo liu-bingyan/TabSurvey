@@ -20,28 +20,9 @@ class LinearModel(nn.Module):
         out = torch.relu(out)
         return out
 
-class MLP(nn.Module):
-    def __init__(self, in_features=100,hidden_dim=68, num_hidden_layers=3):
-        super(MLP, self).__init__()
-        self.layers = nn.ModuleList()
-        self.layers.append(nn.Linear(in_features, hidden_dim))
-        self.layers.append(nn.ReLU())
-        for _ in range(num_hidden_layers - 1):
-            self.layers.append(nn.Linear(hidden_dim, hidden_dim))
-            self.layers.append(nn.ReLU())
-        self.layers.append(nn.Linear(hidden_dim, 1))
-        self.layers.append(nn.ReLU())
-
-        self.connections = (num_hidden_layers-1)* hidden_dim**2 + hidden_dim*(in_features+1)
-
-    def forward(self, x):
-        for layer in self.layers:
-            x = layer(x)
-        return x
-
 def run(args):
     input_size = 54
-    hidden_dim = 99
+    hidden_dim = 1
     num_samples = 500000
     num_epochs = 300
     learning_rate = 7.0e-4
@@ -57,7 +38,7 @@ def run(args):
     print(f"Should take {GFLO/1600:.2f} seconds on a 5 TFLOPS machine")
 
     # Create dummy data
-    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0.00001)
+    x, y = datasets.make_regression(n_samples=num_samples, n_features=input_size, noise=0)
     x = torch.tensor(x, dtype=torch.float32)
     y = y.reshape(-1, 1)
     y = torch.tensor(y, dtype=torch.float32)
