@@ -7,7 +7,9 @@ import argparse
 import torch.nn.functional as F
 from utils import timer
 from torch.utils.data import DataLoader, TensorDataset
-from fast_tensor_data_loader import FastTensorDataLoader
+import fast_tensor_data_loader
+import fast_tensor_data_loader_2
+
 
 class MLP(nn.Module):
     def __init__(self, in_features,hidden_dim,out_features, num_hidden_layers):
@@ -27,6 +29,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
+@profile
 def run(args):
     num_epochs = args.num_epochs
     batch_size = args.batch_size    
@@ -64,8 +67,9 @@ def run(args):
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     dataset = TensorDataset(x, y)
-    dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
-    dataloader3 = FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
+    dataloader2 = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
+    dataloader3 = fast_tensor_data_loader.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
+    dataloader4 = fast_tensor_data_loader.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
 
     print('start training the model')
     epoch_timer = timer.Timer()
@@ -75,7 +79,14 @@ def run(args):
     print(f'Initial Loss: {loss.item():.10f}')
     for epoch in range(num_epochs):
         epoch_timer.start()
-        if args.data_loader==3:
+        if args.data_loader==4:
+            for i, (batch_x, batch_y) in enumerate(dataloader4):
+                outputs = model(batch_x)
+                loss = criterion(outputs, batch_y)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+        elif args.data_loader==3:
             for i, (batch_x, batch_y) in enumerate(dataloader3):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
@@ -83,13 +94,17 @@ def run(args):
                 loss.backward()
                 optimizer.step() 
         elif args.data_loader==2:
-            for i, (batch_x, batch_y) in enumerate(dataloader):
+            for i, (batch_x, batch_y) in enumerate(dataloader2):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()              
         elif args.data_loader==1:
+            if args.shuffle:
+                indices = torch.randperm(num_samples)
+                x = x[indices]
+                y = y[indices]
             for i in range(0, num_samples, batch_size):
                 batch_x = x[i:i+batch_size]
                 batch_y = y[i:i+batch_size]
@@ -104,8 +119,8 @@ def run(args):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-        if (epoch<10)| ((epoch+1) % 10 == 0) :
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
+        #if (epoch<10)| ((epoch+1) % 10 == 0) :
+            #print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
         epoch_timer.end()        
     print('finished training the model')
 
@@ -126,7 +141,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--data_loader", type=int, default=0, help="Use dataloader or not")
     parser.add_argument("--batch_size", type=int, default=16384, help="Batch size for training")
-    parser.add_argument("--learning_rate", type=float, default=1.67e-3, help="Use dataloader or not")
+    parser.add_argument("--learning_rate", type=float, default=None, help="Use dataloader or not")
     parser.add_argument("--shuffle", type=bool, default=False, help="Shuffle the dataset",action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()
