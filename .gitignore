@@ -7,15 +7,15 @@ __pycache/
 catboost_info/
 logs/
 output/
-dataset/
+__pycache__/
 
 
 *.db
 *.zip
 *.csv
 *.info
-*.ps1
 
-__MEMO.md
-__TODO.md
+____gflops.md
+____MEMO.md
+____TODO.md
 

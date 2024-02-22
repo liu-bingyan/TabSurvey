@@ -5,10 +5,8 @@ import sklearn
 from sklearn import datasets
 import argparse
 import torch.nn.functional as F
-from utils import timer
+from utils import timer,fast_tensor_data_loader,fast_tensor_data_loader_2
 from torch.utils.data import DataLoader, TensorDataset
-import fast_tensor_data_loader
-import fast_tensor_data_loader_2
 
 
 class MLP(nn.Module):
@@ -69,7 +67,7 @@ def run(args):
     dataset = TensorDataset(x, y)
     dataloader2 = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
     dataloader3 = fast_tensor_data_loader.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
-    dataloader4 = fast_tensor_data_loader.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
+    dataloader5 = fast_tensor_data_loader_2.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
 
     print('start training the model')
     epoch_timer = timer.Timer()
@@ -79,8 +77,8 @@ def run(args):
     print(f'Initial Loss: {loss.item():.10f}')
     for epoch in range(num_epochs):
         epoch_timer.start()
-        if args.data_loader==4:
-            for i, (batch_x, batch_y) in enumerate(dataloader4):
+        if args.data_loader==5:
+            for i, (batch_x, batch_y) in enumerate(dataloader5):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
                 optimizer.zero_grad()
@@ -124,13 +122,21 @@ def run(args):
         epoch_timer.end()        
     print('finished training the model')
 
+    
     test_timer.start()
+
     model.eval()
     with torch.no_grad():
         test_outputs = model(x)
         test_loss = criterion(test_outputs, y)
         print(f'Test Loss: {test_loss.item():.10f}')
+        _, predicted = torch.max(test_outputs, 1)
+        total = y.size(0)
+        correct = (predicted == torch.argmax(y, dim=1)).sum().item()
+        accuracy = correct / total * 100
+        print(f'Test Accuracy: {accuracy:.2f}%')        
     test_timer.end()
+
     print(f'epoch : {epoch_timer.get_average_time()}, total : {epoch_timer.get_total_time()}, test : {test_timer.get_average_time()}')    
 
 
