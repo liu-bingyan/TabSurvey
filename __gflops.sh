@@ -1,4 +1,4 @@
-loaders=(1 3 5)
+loaders=(1 2 3)
 batchSizes=8192 # (32768 65532 131064 262128) # (4096 2048 1024 512 256 128)
 shuffleOptions=("--no-shuffle" "--shuffle")
 
