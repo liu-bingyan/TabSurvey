@@ -1,7 +1,7 @@
 #!/bin/bash
 
 N_TRIALS=5
-EPOCHS=400
+EPOCHS=30
 
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
@@ -14,7 +14,7 @@ KERAS_ENV="tensorflow"
 # MODELS=( "LinearModel" "KNN" "DecisionTree" "RandomForest" "XGBoost" "CatBoost" "LightGBM" "MLP" "TabNet" "VIME")
 
 declare -A MODELS
-MODELS=( ####["LinearModel"]=$SKLEARN_ENV
+MODELS=( #["LinearModel"]=$SKLEARN_ENV
          ####["KNN"]=$SKLEARN_ENV
          #["SVM"]=$SKLEARN_ENV
          #["DecisionTree"]=$SKLEARN_ENV

@@ -27,7 +27,7 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-#@profile
+@profile
 def run(args):
     num_epochs = args.num_epochs
     batch_size = args.batch_size    
@@ -56,10 +56,10 @@ def run(args):
     y = F.one_hot(y-1, num_classes=7).to(torch.float32)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    # move data and model to GPU
-    #x = x.to(device)
-    #y = y.to(device)
-    #model = model.to(device)
+    #move data and model to GPU
+    x = x.to(device)
+    y = y.to(device)
+    model = model.to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -93,7 +93,7 @@ def run(args):
                 loss.backward()
                 optimizer.step() 
         elif args.data_loader==2:
-            for i, (batch_x, batch_y) in tqdm(enumerate(dataloader2)):
+            for i, (batch_x, batch_y) in enumerate(dataloader2):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
                 optimizer.zero_grad()
@@ -118,8 +118,8 @@ def run(args):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-        if (epoch<10)| ((epoch+1) % 10 == 0) :
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
+        #if (epoch<10)| ((epoch+1) % 10 == 0) :
+            #print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.10f}')
         epoch_timer.end()        
     print('finished training the model')
 
