@@ -5,7 +5,7 @@ import sklearn
 from sklearn import datasets
 import argparse
 import torch.nn.functional as F
-from utils import timer,fast_tensor_data_loader,fast_tensor_data_loader_2
+from utils import timer,fast_tensor_data_loader
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm
 
@@ -67,8 +67,7 @@ def run(args):
     dataset = TensorDataset(x, y)
     dataloader2 = DataLoader(dataset, batch_size=args.batch_size, shuffle=args.shuffle)
     dataloader3 = fast_tensor_data_loader.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
-    dataloader5 = fast_tensor_data_loader_2.FastTensorDataLoader(x, y, batch_size=args.batch_size, shuffle=args.shuffle)
-
+    
     print('start training the model')
     epoch_timer = timer.Timer()
     test_timer = timer.Timer()
@@ -78,14 +77,7 @@ def run(args):
     
     for epoch in range(num_epochs):
         epoch_timer.start()
-        if args.data_loader==5:
-            for i, (batch_x, batch_y) in enumerate(dataloader5):
-                outputs = model(batch_x)
-                loss = criterion(outputs, batch_y)
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-        elif args.data_loader==3:
+        if args.data_loader==3:
             for i, (batch_x, batch_y) in enumerate(dataloader3):
                 outputs = model(batch_x)
                 loss = criterion(outputs, batch_y)
