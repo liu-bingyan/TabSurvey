@@ -1,13 +1,20 @@
 # Training time  prediction and actual cost
+## Description 
 
-The time spend on training doesn't match with theoretical prediction for tabular data. In particular, batch size influence the speed in an un expected way. I recorded the time spent on training for a MLP model on the CoverType dataset, using different batchsizes, in the folder /timing/kernprof. 
+The time spend on training doesn't match with theoretical prediction for tabular data. Script ``gflops.sh`` experiments training time for different batchsizes and record the time spent on training for a MLP model on the CoverType dataset, using different batchsizes. Results are saved in the folder /timing/kernprof. 
 
+To run it, one need to install line_profiler.
+
+## Explanation
 The issue is due to the default datalodaer doesn't work well for tabular data. We have replaced it using the FasterTensorDataLoader given by https://github.com/hcarlens/pytorch-tabular/blob/master/fast_tensor_data_loader.py. 
 
-After that replacement, the training time is acceptable with large batch size. However, one can notice that the time spend is proportional to the number of batches, when batch size is small.
+After that replacement, the training time is acceptable with large batch size.
+
+## Issue
+However, one can notice that the time spend is proportional to the number of batches, when batch size is small. The batchsize should not affect the training time in theory. This might due to tabular batches are too small for GPUs to perform.
 
 
-``The README file of the parent repo is attached below.`` 
+`The README file of the parent repo is attached below.` 
 
 # Open Performance Benchmark on Tabular Data
 
