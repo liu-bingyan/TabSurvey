@@ -2,7 +2,7 @@
 
 N_TRIALS=3
 EPOCHS=100
-
+LOADER="fast"
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
 TORCH_ENV="torch"
@@ -57,7 +57,7 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS --data_loader 'torch' --num_workers 4
+    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS --data_loader $LOADER
 
     conda deactivate
 
