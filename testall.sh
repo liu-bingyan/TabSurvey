@@ -20,23 +20,23 @@ MODELS=( #["LinearModel"]=$SKLEARN_ENV
          #["DecisionTree"]=$SKLEARN_ENV
          #["RandomForest"]=$SKLEARN_ENV
          #["XGBoost"]=$GBDT_ENV
-         ####["CatBoost"]=$GBDT_ENV
-         ####["LightGBM"]=$GBDT_ENV
+         #["CatBoost"]=$GBDT_ENV
+         #["LightGBM"]=$GBDT_ENV
          ["MLP"]=$TORCH_ENV
          #["MLPEMB"]=$TORCH_ENV
-         ####["TabNet"]=$TORCH_ENV
-         ####["VIME"]=$TORCH_ENV
+         #["TabNet"]=$TORCH_ENV
+         #["VIME"]=$TORCH_ENV
          #["TabTransformer"]=$TORCH_ENV
-         ####["ModelTree"]=$GBDT_ENV
-         ####["NODE"]=$TORCH_ENV
-         ####["DeepGBM"]=$TORCH_ENV
-         ####["RLN"]=$KERAS_ENV
-         ####["DNFNet"]=$KERAS_ENV
-         ####["STG"]=$TORCH_ENV
+         #["ModelTree"]=$GBDT_ENV
+         #["NODE"]=$TORCH_ENV
+         #["DeepGBM"]=$TORCH_ENV
+         #["RLN"]=$KERAS_ENV
+         #["DNFNet"]=$KERAS_ENV
+         #["STG"]=$TORCH_ENV
          ####["NAM"]=$TORCH_ENV
          #["DeepFM"]=$TORCH_ENV
          #["SAINT"]=$TORCH_ENV
-         ####["DANet"]=$TORCH_ENV
+         #["DANet"]=$TORCH_ENV
           )
 
 CONFIGS=( #"config/adult.yml"
@@ -57,7 +57,7 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS --data_loader $LOADER
+    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS --data_loader $LOADER 
 
     conda deactivate
 
