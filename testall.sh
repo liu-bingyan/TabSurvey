@@ -1,7 +1,7 @@
 #!/bin/bash
 
 N_TRIALS=3
-EPOCHS=100
+EPOCHS=10
 LOADER="fast"
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
