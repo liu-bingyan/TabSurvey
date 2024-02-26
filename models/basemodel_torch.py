@@ -3,7 +3,7 @@ from models.basemodel import BaseModel
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import TensorDataset
+from torch.utils.data import TensorDataset, DataLoader
 from utils.fast_tensor_data_loader import FastTensorDataLoader
 
 import numpy as np
@@ -57,12 +57,23 @@ class BaseModelTorch(BaseModel):
             y_val = y_val.float()
 
         train_dataset = TensorDataset(X, y)
-        train_loader = FastTensorDataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=False)
-                                  #num_workers=4)
-
+        train_loader = None
+        if self.args.data_loader == "fast":
+            train_loader = FastTensorDataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=self.args.shuffle)
+        elif self.args.data_loader == "torch":
+            train_loader = DataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=self.args.shuffle,num_workers=self.args.num_workers)
+        else:
+            raise NotImplementedError("DataLoader " + self.args.data_loader + " not implemented.")
+        
         val_dataset = TensorDataset(X_val, y_val)
-        val_loader = FastTensorDataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=False)
-
+        val_loader = None
+        if self.args.data_loader == "fast":
+            val_loader = FastTensorDataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=self.args.shuffle)
+        elif self.args.data_loader == "torch":
+            val_loader = DataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=self.args.shuffle,num_workers=self.args.num_workers)
+        else:
+            raise NotImplementedError("DataLoader " + self.args.data_loader + " not implemented.")
+        
         min_val_loss = float("inf")
         min_val_loss_idx = 0
 
