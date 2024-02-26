@@ -3,7 +3,8 @@ from models.basemodel import BaseModel
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import TensorDataset, DataLoader
+from torch.utils.data import TensorDataset
+from utils.fast_tensor_data_loader import FastTensorDataLoader
 
 import numpy as np
 
@@ -35,7 +36,6 @@ class BaseModelTorch(BaseModel):
 
         return torch.device(device)
  
-    @profile
     def fit(self, X, y, X_val=None, y_val=None):
         optimizer = optim.AdamW(self.model.parameters(), lr=self.params["learning_rate"])
 
@@ -57,11 +57,11 @@ class BaseModelTorch(BaseModel):
             y_val = y_val.float()
 
         train_dataset = TensorDataset(X, y)
-        train_loader = DataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=False,
-                                  num_workers=4)
+        train_loader = FastTensorDataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=False)
+                                  #num_workers=4)
 
         val_dataset = TensorDataset(X_val, y_val)
-        val_loader = DataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=False)
+        val_loader = FastTensorDataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=False)
 
         min_val_loss = float("inf")
         min_val_loss_idx = 0
