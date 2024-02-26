@@ -1,6 +1,6 @@
 #!/bin/bash
 
-N_TRIALS=5
+N_TRIALS=3
 EPOCHS=100
 
 SKLEARN_ENV="sklearn"
@@ -57,7 +57,7 @@ for config in "${CONFIGS[@]}"; do
 
     conda activate "${MODELS[$model]}"
 
-    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS
+    python train.py --config "$config" --model_name "$model" --n_trials $N_TRIALS --epochs $EPOCHS --data_loader 'torch' --num_workers 4
 
     conda deactivate
 
