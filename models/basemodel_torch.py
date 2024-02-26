@@ -59,7 +59,7 @@ class BaseModelTorch(BaseModel):
         train_dataset = TensorDataset(X, y)
         train_loader = None
         if self.args.data_loader == "fast":
-            train_loader = FastTensorDataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=self.args.shuffle)
+            train_loader = FastTensorDataLoader(train_dataset, batch_size=self.args.batch_size, shuffle=self.args.shuffle)
         elif self.args.data_loader == "torch":
             train_loader = DataLoader(dataset=train_dataset, batch_size=self.args.batch_size, shuffle=self.args.shuffle,num_workers=self.args.num_workers)
         else:
@@ -68,7 +68,7 @@ class BaseModelTorch(BaseModel):
         val_dataset = TensorDataset(X_val, y_val)
         val_loader = None
         if self.args.data_loader == "fast":
-            val_loader = FastTensorDataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=self.args.shuffle)
+            val_loader = FastTensorDataLoader(val_dataset, batch_size=self.args.val_batch_size, shuffle=self.args.shuffle)
         elif self.args.data_loader == "torch":
             val_loader = DataLoader(dataset=val_dataset, batch_size=self.args.val_batch_size, shuffle=self.args.shuffle,num_workers=self.args.num_workers)
         else:
