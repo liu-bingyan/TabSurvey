@@ -1,7 +1,7 @@
 #!/bin/bash
 
 N_TRIALS=5
-EPOCHS=30
+EPOCHS=300
 
 SKLEARN_ENV="sklearn"
 GBDT_ENV="gbdt"
