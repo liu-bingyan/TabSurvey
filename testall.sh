@@ -14,19 +14,19 @@ KERAS_ENV="tensorflow"
 # MODELS=( "LinearModel" "KNN" "DecisionTree" "RandomForest" "XGBoost" "CatBoost" "LightGBM" "MLP" "TabNet" "VIME")
 
 declare -A MODELS
-MODELS=( #["LinearModel"]=$SKLEARN_ENV
+MODELS=( ["LinearModel"]=$SKLEARN_ENV
          ####["KNN"]=$SKLEARN_ENV
-         #["SVM"]=$SKLEARN_ENV
-         #["DecisionTree"]=$SKLEARN_ENV
-         #["RandomForest"]=$SKLEARN_ENV
-         #["XGBoost"]=$GBDT_ENV
+         ["SVM"]=$SKLEARN_ENV
+         ["DecisionTree"]=$SKLEARN_ENV
+         ["RandomForest"]=$SKLEARN_ENV
+         ["XGBoost"]=$GBDT_ENV
          ####["CatBoost"]=$GBDT_ENV
          ####["LightGBM"]=$GBDT_ENV
          ["MLP"]=$TORCH_ENV
-         #["MLPEMB"]=$TORCH_ENV
+         ["MLPEMB"]=$TORCH_ENV
          ####["TabNet"]=$TORCH_ENV
          ####["VIME"]=$TORCH_ENV
-         #["TabTransformer"]=$TORCH_ENV
+         ["TabTransformer"]=$TORCH_ENV
          ####["ModelTree"]=$GBDT_ENV
          ####["NODE"]=$TORCH_ENV
          ####["DeepGBM"]=$TORCH_ENV
@@ -34,12 +34,12 @@ MODELS=( #["LinearModel"]=$SKLEARN_ENV
          ####["DNFNet"]=$KERAS_ENV
          ####["STG"]=$TORCH_ENV
          ####["NAM"]=$TORCH_ENV
-         #["DeepFM"]=$TORCH_ENV
-         #["SAINT"]=$TORCH_ENV
+         ["DeepFM"]=$TORCH_ENV
+         ["SAINT"]=$TORCH_ENV
          ####["DANet"]=$TORCH_ENV
           )
 
-CONFIGS=( #"config/adult.yml"
+CONFIGS=( "config/adult.yml"
           "config/covertype.yml"
           #"config/artifact.yml"
           #"config/california_housing.yml"
