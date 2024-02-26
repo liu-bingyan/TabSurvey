@@ -120,10 +120,10 @@ def get_predictions_from_file(args):
     return content
 
 def save_results_to_csv_file(args,results, append=True):
-    filename = 'output/'+args.model_name+'_'+args.dataset+'.csv'
+    filename = 'output/profile/'+args.model_name+'_'+args.dataset+'.csv'
     new_res = pd.DataFrame(results,index=[0])
     
-    log_folder = "output"
+    log_folder = "output/profile"
     if not os.path.exists(log_folder):
         os.makedirs(log_folder)
 
