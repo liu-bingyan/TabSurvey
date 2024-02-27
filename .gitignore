@@ -8,6 +8,7 @@ catboost_info/
 logs/
 output/
 __pycache__/
+timing/models
 
 
 *.db
