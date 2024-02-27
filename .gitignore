@@ -2,8 +2,10 @@ output/
 __pycache__/
 logs/
 container_output/
-timing/models/
+timing/models
 timing/output
 timing/logs
 
 *.ps1 
+*.npy
+*.pt
