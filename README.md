@@ -11,6 +11,9 @@ After that replacement, the training time is acceptable with large batch size.
 
 ## Issue
 However, one can notice that the time spend is proportional to the number of batches, when batch size is small. The batchsize should not affect the training time in theory. This might due to tabular batches are too small for GPUs to perform.
+Therefore, during the training we set the batchsize to be a large number 16384 to guarantee faster training.
+
+--------------
 
 
 `The README file of the parent repo is attached below.` 
