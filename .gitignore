@@ -1,23 +1,11 @@
-__pycache/
-*.pyc
-
-.idea/
-.ipynb_checkpoints/
-
-catboost_info/
-logs/
 output/
 __pycache__/
+logs/
+container_output/
+timing/models/
+timing/output
 
-
-*.db
-*.zip
-*.csv
-*.info
 *.ps1 
-*.ipynb
+*.md
 
-____gflops.md
-____MEMO.md
-____TODO.md
-
+!README.md
