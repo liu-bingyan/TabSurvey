@@ -1,6 +1,6 @@
 # Training time  prediction and actual cost
 ## Description 
-This github repo runs a majority of the (model,dataset) pair in the TabSurvey Table. Results, in particular the training time, is recorded in the subfolder timing. Notice that the maximum epoch is set to be 100.
+This github repo runs majority of the (model,dataset) pairs in the TabSurvey Table. Trainig results, in particular the training times, arerecorded in the folder timing, where that the maximum epoch is set to be 100.
 
 ## Training time issue and its explanation
 The time spend on training doesn't match with theoretical prediction for tabular data. Script ``gflops.sh`` experiments training time for different batchsizes and record the time spent on training for a MLP model on the CoverType dataset, using different batchsizes. Results are saved in the folder /timing/kernprof. To run it, one need to install line_profiler.
