@@ -7,4 +7,3 @@ timing/output
 timing/logs
 
 *.ps1 
-!README.md
