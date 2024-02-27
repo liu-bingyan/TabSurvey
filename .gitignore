@@ -4,8 +4,7 @@ logs/
 container_output/
 timing/models/
 timing/output
+timing/logs
 
 *.ps1 
-*.md
-
 !README.md

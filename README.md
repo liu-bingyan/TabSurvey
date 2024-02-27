@@ -1,11 +1,10 @@
 # Training time  prediction and actual cost
 ## Description 
+This github repo runs a majority of the (model,dataset) pair in the TabSurvey Table. 
 
-The time spend on training doesn't match with theoretical prediction for tabular data. Script ``gflops.sh`` experiments training time for different batchsizes and record the time spent on training for a MLP model on the CoverType dataset, using different batchsizes. Results are saved in the folder /timing/kernprof. 
+## Training time issue and its explanation
+The time spend on training doesn't match with theoretical prediction for tabular data. Script ``gflops.sh`` experiments training time for different batchsizes and record the time spent on training for a MLP model on the CoverType dataset, using different batchsizes. Results are saved in the folder /timing/kernprof. To run it, one need to install line_profiler.
 
-To run it, one need to install line_profiler.
-
-## Explanation
 The issue is due to the default datalodaer doesn't work well for tabular data. We have replaced it using the FasterTensorDataLoader given by https://github.com/hcarlens/pytorch-tabular/blob/master/fast_tensor_data_loader.py. 
 
 After that replacement, the training time is acceptable with large batch size.
